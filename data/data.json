@@ -1,0 +1,72 @@
+{
+  "Oslo": {
+    "Endring siste måned": -0.7,
+    "Endring sesongjustert siste måned": 0.3,
+    "Endring hittil i år": "6.1 %",
+    "Endring siste år": 5,
+    "Endring siste 5 år": 26.6,
+    "Endring siste 10 år": 81.6,
+    "Gjennomsnitt kvm. pris": "95 066",
+    "Gjennomsnittspris": "6 956 030"
+  },
+  "Bergen": {
+    "Endring siste måned": -0.4,
+    "Endring sesongjustert siste måned": 0.7,
+    "Endring hittil i år": "11.2 %",
+    "Endring siste år": 8.7,
+    "Endring siste 5 år": 27.3,
+    "Endring siste 10 år": 42.4,
+    "Gjennomsnitt kvm. pris": "54 629",
+    "Gjennomsnittspris": "4 588 084"
+  },
+  "Trondheim": {
+    "Endring siste måned": -0.2,
+    "Endring sesongjustert siste måned": 0.8,
+    "Endring hittil i år": "5.2 %",
+    "Endring siste år": 1.3,
+    "Endring siste 5 år": 20,
+    "Endring siste 10 år": 39.2,
+    "Gjennomsnitt kvm. pris": "53 670",
+    "Gjennomsnittspris": "4 531 763"
+  },
+  "Stavanger m/omegn": {
+    "Endring siste måned": 1.2,
+    "Endring sesongjustert siste måned": 1.6,
+    "Endring hittil i år": "13.2 %",
+    "Endring siste år": 8.8,
+    "Endring siste 5 år": 33.3,
+    "Endring siste 10 år": 21.1,
+    "Gjennomsnitt kvm. pris": "47 323",
+    "Gjennomsnittspris": "4 876 680"
+  },
+  "Kristiansand m/omegn": {
+    "Endring siste måned": -0.3,
+    "Endring sesongjustert siste måned": 0.8,
+    "Endring hittil i år": "9.8 %",
+    "Endring siste år": 6.5,
+    "Endring siste 5 år": 36.4,
+    "Endring siste 10 år": 49.3,
+    "Gjennomsnitt kvm. pris": "40 802",
+    "Gjennomsnittspris": "4 336 181"
+  },
+  "Tromsø": {
+    "Endring siste måned": -0.3,
+    "Endring sesongjustert siste måned": 0.7,
+    "Endring hittil i år": "8.4 %",
+    "Endring siste år": 3,
+    "Endring siste 5 år": 15.2,
+    "Endring siste 10 år": 39.4,
+    "Gjennomsnitt kvm. pris": "56 118",
+    "Gjennomsnittspris": "4 646 623"
+  },
+  "Norge": {
+    "Endring siste måned": -0.6,
+    "Endring sesongjustert siste måned": 0.4,
+    "Endring hittil i år": "7.6 %",
+    "Endring siste år": 4.1,
+    "Endring siste 5 år": 24.8,
+    "Endring siste 10 år": 56.6,
+    "Gjennomsnitt kvm. pris": "53 776",
+    "Gjennomsnittspris": "4 795 936"
+  }
+}
