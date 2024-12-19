@@ -1,3 +1,3 @@
-import { getData } from "./data";
+import { getData } from "./data.js";
 
-await getData();
+await getData()

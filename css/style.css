@@ -1,8 +1,17 @@
 html {
-  color: #222;
+  color: #e3e3e3;
   font-size: 1em;
   line-height: 1.4;
   font-family: Roboto, sans-serif;
+}
+
+body {
+  background-color: #222222;
+  display: flex;
+  justify-content: center;
+  align-items: center
+  
+
 }
 
 h1 {
