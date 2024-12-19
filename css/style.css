@@ -28,6 +28,7 @@ h1 {
 }
 
 #chart-container {
-  height: 400px;
-  width: 500px;
+  height: 500px;
+  width: 800px;
+  background-color: #313131;
 }
