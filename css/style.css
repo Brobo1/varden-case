@@ -32,3 +32,11 @@ h1 {
   width: 800px;
   background-color: #313131;
 }
+
+svg {
+  /* using border-box else padding overflows container */
+  box-sizing: border-box;
+  padding: 20px;
+  height: 100%;
+  width: 100%;
+}
