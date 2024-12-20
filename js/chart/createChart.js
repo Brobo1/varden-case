@@ -6,6 +6,8 @@ export async function createChart() {
   const data = await getData();
 
   let padding = 40;
-  addAxes(padding, 50);
-  addBars(data, padding);
+  let barWidth = 60;
+
+  addAxes(padding, 0);
+  addBars(data, padding, barWidth);
 }
