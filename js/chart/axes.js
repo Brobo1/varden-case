@@ -1,8 +1,6 @@
-import { getData } from "../data.js";
-
 const chart = document.getElementById("chart");
 
-export function addAxes(padding, centerPoint) {
+export function addAxes(padding, centerPoint, maxValue, minValue) {
   let chartStyles = window.getComputedStyle(chart);
 
   let horizontalAxisLine = `

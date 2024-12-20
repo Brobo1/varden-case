@@ -1,5 +1,3 @@
-import { getData } from "../data.js";
-
 const chart = document.getElementById("chart");
 
 let chartStyles = window.getComputedStyle(chart);
@@ -7,7 +5,6 @@ export function addBar(padding, barHeight, city, spacing) {
   let YAxisLen = parseInt(chartStyles.height) - parseInt(padding);
   let barStartPoint = YAxisLen - barHeight;
 
-  // console.log(barStartPoint, barHeight, YAxisLen);
   let bar = `
     <rect x="${padding + spacing}" y=${barStartPoint - 1} width="30" height="${barHeight}"/>
     <text x="${padding + spacing}" y="${padding + 440}">${city}</text>
@@ -15,11 +12,10 @@ export function addBar(padding, barHeight, city, spacing) {
   chart.innerHTML += bar;
 }
 
-export async function addBars(padding) {
-  const data = await getData();
+export function addBars(data, padding) {
   let spacing = 20;
   let yAxisLen = parseInt(chartStyles.height) - parseInt(padding);
-  let xAxisLen = parseInt(chartStyles.width) - parseInt(padding);
+  let xAxisLen = parseInt(chartStyles.width);
 
   for (const city in data) {
     addBar(
@@ -29,6 +25,6 @@ export async function addBars(padding) {
       spacing,
     );
 
-    spacing += (xAxisLen - padding ) / Object.keys(data).length;
+    spacing += (xAxisLen - 150) / (Object.keys(data).length - 1);
   }
 }
