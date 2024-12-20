@@ -12,31 +12,35 @@ body {
   align-items: center;
 }
 
-html,
-body {
-  height: 100%;
-}
+/*html,*/
+/*body {*/
+/*  height: 100%;*/
+/*}*/
 
 h1 {
   font-weight: 400;
 }
-
+main {
+  width: 100%;
+}
 #container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 #chart-container {
   height: 500px;
-  width: 800px;
+  width: 90%;
+  max-width: 800px;
   background-color: #313131;
 }
 
 svg {
   /* using border-box else padding overflows container */
   box-sizing: border-box;
-  padding: 20px;
+  padding: 40px;
   height: 100%;
   width: 100%;
 }
