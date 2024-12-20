@@ -2,29 +2,40 @@ import { getData } from "../data.js";
 
 const chart = document.getElementById("chart");
 
-export function addAxes() {
+export function addAxes(padding, centerPoint) {
   let chartStyles = window.getComputedStyle(chart);
-  console.log(chartStyles);
-
-  let verticalAxisLine = `
-    <line
-      x1="0"
-      y1=${parseInt(chartStyles.height) - parseInt(chartStyles.padding) * 2}
-      x2=${parseInt(chartStyles.width) - parseInt(chartStyles.padding) * 2}
-      y2=${parseInt(chartStyles.height) - parseInt(chartStyles.padding) * 2}
-      stroke="#bbb"
-      stroke-width="3"
-     />`;
 
   let horizontalAxisLine = `
     <line
-      x1="0"
-      y1="0"
-      x2="0"
-      y2="${parseInt(chartStyles.height) - parseInt(chartStyles.padding) * 2}"
+      id="horizontal-axis"
+      x1="${padding}"
+      x2=${parseInt(chartStyles.width) - parseInt(chartStyles.padding) * 2 - padding}
+      y1=${parseInt(chartStyles.height) - parseInt(chartStyles.padding) * 2 - padding}
+      y2=${parseInt(chartStyles.height) - parseInt(chartStyles.padding) * 2 - padding}
       stroke="#bbb"
-      stroke-width="3"
+      stroke-width="1"
+     />`;
+  let centerAxis = `
+    <line
+      id="center-axis"
+      x1="${padding}"
+      x2=${parseInt(chartStyles.width) - parseInt(chartStyles.padding) * 2 - padding}
+      y1=${parseInt(chartStyles.height) - parseInt(chartStyles.padding) * 2 - padding - centerPoint}
+      y2=${parseInt(chartStyles.height) - parseInt(chartStyles.padding) * 2 - padding - centerPoint}
+      stroke="#bbb"
+      stroke-width="1"
+     />`;
+
+  let verticalAxisLine = `
+    <line
+      id="vertical-axis"
+      x1="${padding}"
+      x2="${padding}"
+      y1="${padding}"
+      y2="${parseInt(chartStyles.height) - parseInt(chartStyles.padding) * 2 - padding}"
+      stroke="#bbb"
+      stroke-width="1"
     />`;
 
-  chart.innerHTML = verticalAxisLine + horizontalAxisLine;
+  chart.innerHTML = verticalAxisLine + horizontalAxisLine + centerAxis;
 }

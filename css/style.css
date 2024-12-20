@@ -40,7 +40,6 @@ main {
 svg {
   /* using border-box else padding overflows container */
   box-sizing: border-box;
-  padding: 40px;
   height: 100%;
   width: 100%;
 }
