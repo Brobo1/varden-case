@@ -7,8 +7,20 @@ export function addBar(padding, barHeight, city, spacing, width) {
   let barStartPoint = YAxisLen - barHeight;
 
   let bar = `
-    <rect x="${padding + spacing}" y=${barStartPoint - 1} width="${width}" height="${barHeight}"/>
-    <text x="${padding + spacing}" y="${padding + 440}">${city}</text>
+    <rect
+      x="${padding + spacing}"
+      y=${barStartPoint - 1}
+      width="${width}"
+      height="${barHeight}"
+    />
+
+    <text
+      x="${padding + spacing}"
+      y="${padding + 440}"
+      textLength="50"
+      >
+      ${city} <tspan></tspan>
+    </text>
   `;
   chart.innerHTML += bar;
 }
