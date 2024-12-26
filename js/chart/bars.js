@@ -26,6 +26,8 @@ export function addBar(
     <text
       x=${padding.x + spacing}
       y=${padding.y + 440}
+            transform="rotate(90, ${padding.x + spacing}, ${padding.y + 420})"
+      text-anchor="middle"
       >
       ${city}
     </text>
