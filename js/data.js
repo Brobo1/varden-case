@@ -41,6 +41,7 @@ function transformData(originalData) {
     "Gjennomsnitt kvm. pris": "avgMCost",
     Gjennomsnittspris: "avgCost",
   };
+
   const result = {};
 
   for (const city in originalData) {
@@ -50,7 +51,9 @@ function transformData(originalData) {
 
       for (const [key, value] of Object.entries(originalCityData)) {
         const newKey = keyMap[key] || key;
-        transformedCityData[newKey] = value;
+        if (typeof value === "string") {
+          transformedCityData[newKey] = parseFloat(value.split(" ").join(""));
+        } else transformedCityData[newKey] = value;
       }
       result[city] = transformedCityData;
     }

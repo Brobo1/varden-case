@@ -3,23 +3,22 @@ const chart = document.getElementById("chart");
 let chartStyles = window.getComputedStyle(chart);
 
 export function addBar(padding, barHeight, city, spacing, width) {
-  let YAxisLen = parseInt(chartStyles.height) - parseInt(padding);
+  let YAxisLen = parseInt(chartStyles.height) - parseInt(padding.y);
   let barStartPoint = YAxisLen - barHeight;
 
   let bar = `
     <rect
-      x="${padding + spacing}"
+      x="${padding.x + spacing}"
       y=${barStartPoint - 1}
       width="${width}"
       height="${barHeight}"
     />
 
     <text
-      x="${padding + spacing}"
-      y="${padding + 440}"
-      textLength="50"
+      x="${padding.x + spacing}"
+      y="${padding.y + 440}"
       >
-      ${city} <tspan></tspan>
+      ${city}
     </text>
   `;
   chart.innerHTML += bar;
@@ -27,8 +26,8 @@ export function addBar(padding, barHeight, city, spacing, width) {
 
 export function addBars(data, padding, width) {
   let spacing = 0;
-  let yAxisLen = parseInt(chartStyles.height) - parseInt(padding);
-  let xAxisLen = parseInt(chartStyles.width) - parseInt(padding) * 2;
+  let yAxisLen = parseInt(chartStyles.height) - parseInt(padding.x);
+  let xAxisLen = parseInt(chartStyles.width) - parseInt(padding.x) * 2;
   let numBars = Object.keys(data).length;
   let totalSpacing = xAxisLen - numBars * width;
   let spaceBetweenBars = totalSpacing / (numBars + 1);
