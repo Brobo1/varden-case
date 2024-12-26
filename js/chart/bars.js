@@ -17,15 +17,15 @@ export function addBar(
 
   let bar = `
     <rect
-      x="${padding.x + spacing}"
+      x=${padding.x + spacing}
       y=${barStartPoint}
-      width="${width}"
-      height="${barHeight}"
+      width=${width}
+      height=${barHeight}
     />
 
     <text
-      x="${padding.x + spacing}"
-      y="${padding.y + 440}"
+      x=${padding.x + spacing}
+      y=${padding.y + 440}
       >
       ${city}
     </text>
@@ -33,7 +33,15 @@ export function addBar(
   chart.innerHTML += bar;
 }
 
-export function addBars(chartStyle, data, padding, width, offset, scale) {
+export function addBars(
+  chartStyle,
+  data,
+  padding,
+  width,
+  offset,
+  scale,
+  scaleFactor,
+) {
   let spacing = 0;
   let numBars = Object.keys(data).length;
   let totalSpacing = chartStyle.xAxis - numBars * width;
@@ -43,7 +51,7 @@ export function addBars(chartStyle, data, padding, width, offset, scale) {
     spacing += spaceBetweenBars;
 
     let value = data[city].dMonth;
-    let barHeight = Math.abs(value * scale);
+    let barHeight = Math.abs(value * scale) * scaleFactor;
     let isNegative = value < 0;
 
     addBar(

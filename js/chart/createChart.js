@@ -5,6 +5,7 @@ import { getData } from "../data.js";
 export async function createChart(chartData) {
   const data = await getData();
   let padding = { x: 80, y: 50 };
+  let scaleFactor = 0.9;
 
   const chart = document.getElementById("chart");
   let chartStyles = window.getComputedStyle(chart);
@@ -31,6 +32,6 @@ export async function createChart(chartData) {
 
   let barWidth = 30;
 
-  addAxes(chartStyle, padding, offset);
-  addBars(chartStyle, data, padding, barWidth, offset, scale);
+  addAxes(chartStyle, padding, offset, minMax, scale, scaleFactor);
+  addBars(chartStyle, data, padding, barWidth, offset, scale, scaleFactor);
 }
