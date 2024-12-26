@@ -1,15 +1,22 @@
 const chart = document.getElementById("chart");
 
-let chartStyles = window.getComputedStyle(chart);
-
-export function addBar(padding, barHeight, city, spacing, width) {
-  let YAxisLen = parseInt(chartStyles.height) - parseInt(padding.y);
-  let barStartPoint = YAxisLen - barHeight;
+export function addBar(
+  chartStyle,
+  padding,
+  barHeight,
+  city,
+  spacing,
+  width,
+  offset,
+  isNegative,
+) {
+  let YAxisLen = chartStyle.height - padding.y - offset;
+  let barStartPoint = isNegative ? YAxisLen : YAxisLen - barHeight;
 
   let bar = `
     <rect
       x="${padding.x + spacing}"
-      y=${barStartPoint - 1}
+      y=${barStartPoint}
       width="${width}"
       height="${barHeight}"
     />
@@ -24,23 +31,30 @@ export function addBar(padding, barHeight, city, spacing, width) {
   chart.innerHTML += bar;
 }
 
-export function addBars(data, padding, width) {
+export function addBars(chartStyle, data, padding, width, offset) {
   let spacing = 0;
-  let yAxisLen = parseInt(chartStyles.height) - parseInt(padding.x);
-  let xAxisLen = parseInt(chartStyles.width) - parseInt(padding.x) * 2;
   let numBars = Object.keys(data).length;
-  let totalSpacing = xAxisLen - numBars * width;
+  let totalSpacing = chartStyle.xAxis - numBars * width;
   let spaceBetweenBars = totalSpacing / (numBars + 1);
 
   for (const city in data) {
     spacing += spaceBetweenBars;
+
+    let value = data[city].dMonth;
+    let barHeight = Math.abs(value * (chartStyle.yAxis / (offset / 5)));
+    let isNegative = value < 0;
+
     addBar(
+      chartStyle,
       padding,
-      Math.abs(yAxisLen * Math.abs(data[city].dMonth)),
+      barHeight,
       city,
       spacing,
       width,
+      offset,
+      isNegative,
     );
+
     spacing += width;
   }
 }
