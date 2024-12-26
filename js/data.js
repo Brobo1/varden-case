@@ -55,7 +55,8 @@ function transformData(originalData) {
           transformedCityData[newKey] = parseFloat(value.split(" ").join(""));
         } else transformedCityData[newKey] = value;
       }
-      result[city] = transformedCityData;
+
+      result[city.split(" ")[0]] = transformedCityData;
     }
   }
   return result;

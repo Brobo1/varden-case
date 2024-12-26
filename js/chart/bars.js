@@ -10,8 +10,10 @@ export function addBar(
   offset,
   isNegative,
 ) {
-  let YAxisLen = chartStyle.height - padding.y - offset;
-  let barStartPoint = isNegative ? YAxisLen : YAxisLen - barHeight;
+  let centerPoint = chartStyle.height - padding.y - offset;
+  let barStartPoint = isNegative
+    ? centerPoint + 1
+    : centerPoint - barHeight - 1;
 
   let bar = `
     <rect
@@ -31,7 +33,7 @@ export function addBar(
   chart.innerHTML += bar;
 }
 
-export function addBars(chartStyle, data, padding, width, offset) {
+export function addBars(chartStyle, data, padding, width, offset, scale) {
   let spacing = 0;
   let numBars = Object.keys(data).length;
   let totalSpacing = chartStyle.xAxis - numBars * width;
@@ -41,7 +43,7 @@ export function addBars(chartStyle, data, padding, width, offset) {
     spacing += spaceBetweenBars;
 
     let value = data[city].dMonth;
-    let barHeight = Math.abs(value * (chartStyle.yAxis / (offset / 5)));
+    let barHeight = Math.abs(value * scale);
     let isNegative = value < 0;
 
     addBar(

@@ -34,5 +34,5 @@ export function addAxes(chartStyle, padding, centerPoint) {
       stroke-width="1"
     />`;
 
-  chart.innerHTML = verticalAxisLine + horizontalAxisLine + centerAxis;
+  chart.innerHTML = verticalAxisLine + centerAxis;
 }

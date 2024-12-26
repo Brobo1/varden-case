@@ -25,11 +25,12 @@ export async function createChart(chartData) {
   }
 
   let range = minMax.max - minMax.min;
+
   let scale = chartStyle.yAxis / range;
   let offset = scale * Math.abs(minMax.min);
 
   let barWidth = 30;
 
   addAxes(chartStyle, padding, offset);
-  addBars(chartStyle, data, padding, barWidth, offset);
+  addBars(chartStyle, data, padding, barWidth, offset, scale);
 }
