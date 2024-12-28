@@ -1,5 +1,5 @@
 import { addAxes } from "./axes.js";
-import { addBars } from "./bars.js";
+import { addBars } from "./bar/bars.js";
 import { getData } from "../data.js";
 
 export async function createChart(chartData) {

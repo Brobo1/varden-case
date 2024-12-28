@@ -1,6 +1,8 @@
+import { addBarName } from "./barNames.js";
+
 const chart = document.getElementById("chart");
 
-export function addBar(
+function addBar(
   chartStyle,
   padding,
   barHeight,
@@ -10,29 +12,19 @@ export function addBar(
   offset,
   isNegative,
 ) {
+  const barsContainer = document.getElementById("barsContainer");
   let centerPoint = chartStyle.height - padding.y - offset;
   let barStartPoint = isNegative
     ? centerPoint + 1
     : centerPoint - barHeight - 1;
 
-  let bar = `
-    <rect
-      x=${padding.x + spacing}
-      y=${barStartPoint}
-      width=${width}
-      height=${barHeight}
-    />
+  const bar = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+  bar.setAttribute("x", (padding.x + spacing).toString());
+  bar.setAttribute("y", barStartPoint.toString());
+  bar.setAttribute("width", width.toString());
+  bar.setAttribute("height", barHeight.toString());
 
-    <text
-      x=${padding.x + spacing}
-      y=${padding.y + 440}
-            transform="rotate(90, ${padding.x + spacing}, ${padding.y + 420})"
-      text-anchor="middle"
-      >
-      ${city}
-    </text>
-  `;
-  chart.innerHTML += bar;
+  barsContainer.appendChild(bar);
 }
 
 export function addBars(
@@ -48,6 +40,21 @@ export function addBars(
   let numBars = Object.keys(data).length;
   let totalSpacing = chartStyle.xAxis - numBars * width;
   let spaceBetweenBars = totalSpacing / (numBars + 1);
+
+  let barNameXPos = padding.x;
+  let barNamesContainer = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "svg",
+  );
+  barNamesContainer.id = "barNamesContainer";
+  chart.appendChild(barNamesContainer);
+
+  let barsContainer = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "svg",
+  );
+  barsContainer.id = "barsContainer";
+  chart.appendChild(barsContainer);
 
   for (const city in data) {
     spacing += spaceBetweenBars;
@@ -66,6 +73,7 @@ export function addBars(
       offset,
       isNegative,
     );
+    addBarName(chartStyle, padding, city, barNameXPos);
 
     spacing += width;
   }

@@ -45,7 +45,6 @@ export function addAxes(
   }
 
   chart.innerHTML = yAxis + xAxis + text;
-  chart.append(text);
 }
 
 function yAxisLabels(
