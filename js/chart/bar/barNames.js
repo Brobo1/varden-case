@@ -9,6 +9,5 @@ export function addBarName(chartStyle, padding, city, barNameXPos) {
   barName.setAttribute("x", barNameXPos.toString());
   barNamesContainer.appendChild(barName);
 
-  const textWidth = barName.getBBox().width;
-  console.log(textWidth);
+  return barName.getBBox().width;
 }

@@ -8,6 +8,12 @@ export function addAxes(
   scale,
   scaleFactor,
 ) {
+  let axisContainer = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "svg",
+  );
+  axisContainer.id = "axisContainer";
+
   let xAxis = `
     <line
       id=center-axis

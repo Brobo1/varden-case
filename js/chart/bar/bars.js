@@ -73,7 +73,7 @@ export function addBars(
       offset,
       isNegative,
     );
-    addBarName(chartStyle, padding, city, barNameXPos);
+    barNameXPos += addBarName(chartStyle, padding, city, barNameXPos) + 5;
 
     spacing += width;
   }
