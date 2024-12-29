@@ -1,6 +1,6 @@
 import { createChart } from "./chart/createChart.js";
 
-let chartData = "dYr";
+let chartData = "Endring siste måned";
 
 let strokeColor = {
   noHover: "#bbbbbb",

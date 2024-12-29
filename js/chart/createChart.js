@@ -1,8 +1,10 @@
 import { addAxes } from "./axes.js";
 import { addBars } from "./bar/bars.js";
 import { getData } from "../data.js";
+import { chartHeader } from "./header/chartHeader.js";
 
 export async function createChart(chartData, barColors, strokeColor) {
+  // Not optimal as fetching everytime createChart gets called. Move further up
   const data = await getData();
 
   let padding = { x: 80, y: 50 };
@@ -16,6 +18,8 @@ export async function createChart(chartData, barColors, strokeColor) {
     xAxis: parseInt(chartStyles.width) - padding.x * 2,
     yAxis: parseInt(chartStyles.height) - padding.y * 2,
   };
+
+  //redraw the chart
   chart.innerHTML = "";
 
   let minMax = { min: Infinity, max: -Infinity };
@@ -33,6 +37,8 @@ export async function createChart(chartData, barColors, strokeColor) {
   let offset = minMax.min < 0 ? scale * Math.abs(minMax.min) : 0;
 
   let barWidth = 30;
+
+  chartHeader(data, chartData);
 
   addBars(
     chartStyle,

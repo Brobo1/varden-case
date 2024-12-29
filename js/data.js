@@ -50,10 +50,9 @@ function transformData(originalData) {
       const transformedCityData = {};
 
       for (const [key, value] of Object.entries(originalCityData)) {
-        const newKey = keyMap[key] || key;
         if (typeof value === "string") {
-          transformedCityData[newKey] = parseFloat(value.split(" ").join(""));
-        } else transformedCityData[newKey] = value;
+          transformedCityData[key] = parseFloat(value.split(" ").join(""));
+        } else transformedCityData[key] = value;
       }
 
       result[city.split(" ")[0]] = transformedCityData;

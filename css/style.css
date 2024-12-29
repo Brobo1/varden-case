@@ -31,8 +31,10 @@ main {
 }
 
 #chart-container {
+  display: flex;
+  flex-direction: column;
   border-radius: 5px;
-  height: 500px;
+  height: fit-content;
   width: 90%;
   max-width: 800px;
   background-color: #444444;
@@ -41,6 +43,7 @@ main {
 svg {
   /* using border-box else padding overflows container */
   box-sizing: border-box;
+  min-height: 500px;
   height: 100%;
   width: 100%;
 }

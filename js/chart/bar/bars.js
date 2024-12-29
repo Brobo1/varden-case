@@ -64,6 +64,7 @@ export function addBars(
   chart.appendChild(barsContainer);
 
   for (const city in data) {
+    console.log(city);
     spacing += spaceBetweenBars;
 
     let value = data[city][chartData];
