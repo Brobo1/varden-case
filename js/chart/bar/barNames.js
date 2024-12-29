@@ -1,4 +1,4 @@
-export function addBarName(chartStyle, padding, city, barNameXPos) {
+export function addBarName(chartStyle, padding, city, barNameXPos, color) {
   const barNamesContainer = document.getElementById("barNamesContainer");
 
   const barName = document.createElementNS(
@@ -17,6 +17,9 @@ export function addBarName(chartStyle, padding, city, barNameXPos) {
   barNameColor.setAttribute("y", (chartStyle.height - 20).toString());
   barNameColor.setAttribute("width", "10");
   barNameColor.setAttribute("height", "10");
+  barNameColor.setAttribute("fill", color);
+  barNameColor.setAttribute("stroke", "#fff");
+  barNameColor.setAttribute("stroke-width", "1");
 
   const barNameContainer = document.createElementNS(
     "http://www.w3.org/2000/svg",

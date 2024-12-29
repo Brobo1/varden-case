@@ -4,6 +4,15 @@ import { getData } from "../data.js";
 
 export async function createChart(chartData) {
   const data = await getData();
+  let barColors = [
+    "#1f77b4",
+    "#ff7f0e",
+    "#2ca02c",
+    "#d62728",
+    "#9467bd",
+    "#8c564b",
+    "#e377c2",
+  ];
   let padding = { x: 80, y: 50 };
   let scaleFactor = 0.9;
 
@@ -33,6 +42,15 @@ export async function createChart(chartData) {
 
   let barWidth = 30;
 
+  addBars(
+    chartStyle,
+    data,
+    padding,
+    barWidth,
+    offset,
+    scale,
+    scaleFactor,
+    barColors,
+  );
   addAxes(chartStyle, padding, offset, minMax, scale, scaleFactor);
-  addBars(chartStyle, data, padding, barWidth, offset, scale, scaleFactor);
 }
