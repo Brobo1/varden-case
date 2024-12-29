@@ -64,6 +64,9 @@ svg {
   width: 100%;
 }
 
+.axisLabel {
+}
+
 .bar {
   transition: 0.3s ease;
 }

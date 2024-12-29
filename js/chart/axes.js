@@ -67,12 +67,30 @@ function yAxisLabels(
     chartStyle.height - padding.y - (centerPoint + value * scale * scaleFactor);
 
   let label = document.createElementNS("http://www.w3.org/2000/svg", "text");
-  // label.id = "yAxisLabel";
-  label.setAttribute("x", (padding.x - 15).toString());
+  label.setAttribute("x", (padding.x - 17).toString());
   label.setAttribute("y", scaledPos.toString());
   label.setAttribute("dominant-baseline", "central");
   label.setAttribute("text-anchor", "end");
+  label.setAttribute("color", "white");
+  label.setAttribute("class", "axisLabel");
   label.textContent = value + " %";
+
+  chart.appendChild(label);
+  let bBox = label.getBBox();
+  chart.removeChild(label);
+  console.log(bBox);
+
+  let background = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "rect",
+  );
+  background.setAttribute("x", (bBox.x - 4).toString());
+  background.setAttribute("y", (bBox.y - 2).toString());
+  background.setAttribute("width", (bBox.width + 8).toString());
+  background.setAttribute("height", (bBox.height + 4).toString());
+  background.setAttribute("fill", "#9f9f9f");
+  // background.setAttribute("");
+  // background.setAttribute("");
 
   let dash = document.createElementNS("http://www.w3.org/2000/svg", "line");
   dash.setAttribute("x1", (padding.x - 10).toString());
@@ -83,7 +101,7 @@ function yAxisLabels(
   dash.setAttribute("stroke-width", "1");
 
   let labelDash = document.createElementNS("http://www.w3.org/2000/svg", "g");
-  labelDash.append(label, dash);
+  labelDash.append(background, label, dash);
 
   return labelDash;
 }
