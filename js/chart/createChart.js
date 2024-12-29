@@ -28,7 +28,6 @@ export async function createChart(chartData, barColors, strokeColor) {
   }
 
   let range = minMax.min < 0 ? minMax.max - minMax.min : minMax.max;
-  console.log(minMax, range);
 
   let scale = chartStyle.yAxis / range;
   let offset = minMax.min < 0 ? scale * Math.abs(minMax.min) : 0;

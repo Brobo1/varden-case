@@ -38,7 +38,7 @@ export function addAxes(
     { x1: padding.x },
     { x2: padding.x },
     { y1: padding.y },
-    { y2: chartStyle.height - padding.y },
+    { y2: chartStyle.height - padding.y + 0.5 },
   ];
   for (const attr of yAxisPos) {
     let key = Object.keys(attr)[0];

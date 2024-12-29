@@ -53,6 +53,7 @@ window.addEventListener("mouseover", (e) => {
 
     let nameColor = document.querySelector(`.barNameColor.${target[1]}`);
     nameColor.setAttribute("stroke", strokeColor.hover);
+    nameColor.setAttribute("fill", barColors[target[1]].hover);
   }
 });
 
@@ -65,5 +66,6 @@ window.addEventListener("mouseout", (e) => {
 
     let nameColor = document.querySelector(`.barNameColor.${target[1]}`);
     nameColor.setAttribute("stroke", strokeColor.noHover);
+    nameColor.setAttribute("fill", barColors[target[1]].fill);
   }
 });
