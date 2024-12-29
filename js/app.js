@@ -5,7 +5,6 @@ import { chartHeader } from "./chart/header/chartHeader.js";
 let chartData = "Endring siste måned";
 
 const data = await getData();
-chartHeader(data);
 
 let strokeColor = {
   noHover: "#bbbbbb",
@@ -43,6 +42,7 @@ let barColors = {
   },
 };
 
+chartHeader(data);
 createChart(data, chartData, barColors, strokeColor);
 
 //Redraw the chart if window is resized
