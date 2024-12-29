@@ -33,7 +33,7 @@ export async function getData() {
 function transformData(originalData) {
   const keyMap = {
     "Endring siste måned": "dMonth",
-    "Endring sesongjustert siste måned": "dmonthSeasonAdj",
+    "Endring sesongjustert siste måned": "dMonthSeasonAdj",
     "Endring hittil i år": "ytd",
     "Endring siste år": "dYr",
     "Endring siste 5 år": "d5Yr",

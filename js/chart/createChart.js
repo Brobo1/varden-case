@@ -27,11 +27,11 @@ export async function createChart(chartData, barColors, strokeColor) {
     };
   }
 
-  console.log(minMax);
-  let range = minMax.max - minMax.min;
+  let range = minMax.min < 0 ? minMax.max - minMax.min : minMax.max;
+  console.log(minMax, range);
 
   let scale = chartStyle.yAxis / range;
-  let offset = scale * Math.abs(minMax.min);
+  let offset = minMax.min < 0 ? scale * Math.abs(minMax.min) : 0;
 
   let barWidth = 30;
 
