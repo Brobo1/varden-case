@@ -49,8 +49,11 @@ main {
   background-color: #444444;
 }
 
-#chart-dropdown {
+#chart-dropdown,
+.chart-dropdown-option {
   font-size: 24px;
+  font-family: Roboto, sans-serif;
+  font-weight: 300;
 }
 
 svg {

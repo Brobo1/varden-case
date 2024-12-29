@@ -9,6 +9,7 @@ export function chartHeader(data) {
 
   for (const option in data.Oslo) {
     let dropdownOption = document.createElement("option");
+    dropdownOption.className = "chart-dropdown-option";
     dropdownOption.textContent = option;
     dropdown.append(dropdownOption);
   }
