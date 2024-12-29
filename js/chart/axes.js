@@ -73,7 +73,7 @@ function yAxisLabels(
   label.setAttribute("text-anchor", "end");
   label.setAttribute("color", "white");
   label.setAttribute("class", "axisLabel");
-  label.textContent = value + " %";
+  label.textContent = value + "%";
 
   chart.appendChild(label);
   let bBox = label.getBBox();
@@ -89,7 +89,7 @@ function yAxisLabels(
   background.setAttribute("width", (bBox.width + 8).toString());
   background.setAttribute("height", (bBox.height + 4).toString());
   background.setAttribute("fill", "#9f9f9f");
-  // background.setAttribute("");
+  background.setAttribute("rx", "3");
   // background.setAttribute("");
 
   let dash = document.createElementNS("http://www.w3.org/2000/svg", "line");
