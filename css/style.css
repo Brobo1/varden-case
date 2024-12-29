@@ -30,6 +30,15 @@ main {
   width: 100%;
 }
 
+#chart-header {
+  margin: 10px 20px;
+}
+
+#chart-title {
+  margin: 0;
+  font-weight: 300;
+}
+
 #chart-container {
   display: flex;
   flex-direction: column;
@@ -38,6 +47,10 @@ main {
   width: 90%;
   max-width: 800px;
   background-color: #444444;
+}
+
+#chart-dropdown {
+  font-size: 24px;
 }
 
 svg {

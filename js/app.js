@@ -1,6 +1,11 @@
 import { createChart } from "./chart/createChart.js";
+import { getData } from "./data.js";
+import { chartHeader } from "./chart/header/chartHeader.js";
 
 let chartData = "Endring siste måned";
+
+const data = await getData();
+chartHeader(data);
 
 let strokeColor = {
   noHover: "#bbbbbb",
@@ -38,10 +43,19 @@ let barColors = {
   },
 };
 
-createChart(chartData, barColors, strokeColor);
+createChart(data, chartData, barColors, strokeColor);
 
+//Redraw the chart if window is resized
 window.addEventListener("resize", () => {
-  createChart(chartData, barColors, strokeColor);
+  createChart(data, chartData, barColors, strokeColor);
+});
+
+//redraw the chart if dropdown has been changed
+document.addEventListener("change", (e) => {
+  if (e.target.id === "chart-dropdown") {
+    chartData = e.target.value;
+    createChart(data, chartData, barColors, strokeColor);
+  }
 });
 
 window.addEventListener("mouseover", (e) => {

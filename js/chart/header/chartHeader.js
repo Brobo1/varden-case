@@ -1,11 +1,17 @@
 const headerDiv = document.getElementById("chart-header");
 
-export function chartHeader(data, chartData) {
+export function chartHeader(data) {
   headerDiv.innerHTML = "";
 
-  let chartTitle = document.createElement("h2");
-  chartTitle.id = "chart-title";
-  chartTitle.textContent = "data";
+  let dropdown = document.createElement("select");
+  dropdown.id = "chart-dropdown";
+  dropdown.ariaLabel = "Select data";
 
-  headerDiv.append(chartTitle);
+  for (const option in data.Oslo) {
+    let dropdownOption = document.createElement("option");
+    dropdownOption.textContent = option;
+    dropdown.append(dropdownOption);
+  }
+
+  headerDiv.append(dropdown);
 }

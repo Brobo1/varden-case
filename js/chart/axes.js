@@ -72,7 +72,7 @@ function yAxisLabels(
   label.setAttribute("y", scaledPos.toString());
   label.setAttribute("dominant-baseline", "central");
   label.setAttribute("text-anchor", "end");
-  label.textContent = value;
+  label.textContent = value + " %";
 
   let dash = document.createElementNS("http://www.w3.org/2000/svg", "line");
   dash.setAttribute("x1", (padding.x - 10).toString());
