@@ -48,7 +48,7 @@ export function addBars(
   let totalSpacing = chartStyle.xAxis - numBars * width;
   let spaceBetweenBars = totalSpacing / (numBars + 1);
 
-  let barNameXPos = 2;
+  let barNameXPos = 4;
   let barNamesContainer = document.createElementNS(
     "http://www.w3.org/2000/svg",
     "svg",
@@ -90,7 +90,7 @@ export function addBars(
         barNameXPos,
         color.fill,
         strokeColor,
-      ) + 20;
+      ) + 26;
 
     spacing += width;
   }

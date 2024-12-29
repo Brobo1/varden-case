@@ -35,7 +35,22 @@ export function addBarName(
   );
   barNameContainer.append(barNameColor, barName);
 
+  // let bBox = barNamesContainer.getBBox();
   barNamesContainer.appendChild(barNameContainer);
+
+  let bBox = barNameContainer.getBBox();
+  let background = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "rect",
+  );
+  background.setAttribute("class", `barNameBg ${city}`);
+  background.setAttribute("x", (bBox.x.toString() - 4).toString());
+  background.setAttribute("y", bBox.y.toString());
+  background.setAttribute("width", (bBox.width + 8).toString());
+  background.setAttribute("height", bBox.height.toString());
+  background.setAttribute("fill", "#9b9b9b");
+  background.setAttribute("rx", "3");
+  barNameContainer.prepend(background);
 
   return barName.getBBox().width;
 }

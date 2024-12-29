@@ -78,7 +78,6 @@ function yAxisLabels(
   chart.appendChild(label);
   let bBox = label.getBBox();
   chart.removeChild(label);
-  console.log(bBox);
 
   let background = document.createElementNS(
     "http://www.w3.org/2000/svg",

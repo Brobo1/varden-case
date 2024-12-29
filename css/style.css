@@ -67,10 +67,8 @@ svg {
 .axisLabel {
 }
 
-.bar {
-  transition: 0.3s ease;
-}
-
-.barNameColor {
+.bar,
+.barNameColor,
+.barNameBg {
   transition: 0.3s ease;
 }
