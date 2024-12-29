@@ -15,6 +15,7 @@ export async function createChart(chartData) {
     xAxis: parseInt(chartStyles.width) - padding.x * 2,
     yAxis: parseInt(chartStyles.height) - padding.y * 2,
   };
+  chart.innerHTML = "";
 
   let minMax = { min: Infinity, max: -Infinity };
 

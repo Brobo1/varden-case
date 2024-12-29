@@ -13,28 +13,35 @@ export function addAxes(
     "svg",
   );
   axisContainer.id = "axisContainer";
+  chart.appendChild(axisContainer);
+  console.log(axisContainer);
+  let xAxis = document.createElementNS("http://www.w3.org/2000/svg", "line");
+  xAxis.id = "xAxis";
+  xAxis.setAttribute("stroke", "#bbb");
+  let xAxisPos = [
+    { x1: padding.x + 1 },
+    { x2: chartStyle.width - padding.x },
+    { y1: chartStyle.height - padding.y - centerPoint },
+    { y2: chartStyle.height - padding.y - centerPoint },
+  ];
+  for (const attr of xAxisPos) {
+    let key = Object.keys(attr)[0];
+    xAxis.setAttribute(key, attr[key]);
+  }
 
-  let xAxis = `
-    <line
-      id=center-axis
-      x1=${padding.x + 1}
-      x2=${chartStyle.width - padding.x}
-      y1=${chartStyle.height - padding.y - centerPoint}
-      y2=${chartStyle.height - padding.y - centerPoint}
-      stroke=#bbb
-      stroke-width=1
-     />`;
-
-  let yAxis = `
-    <line
-      id=vertical-axis
-      x1=${padding.x}
-      x2=${padding.x}
-      y1=${padding.y}
-      y2=${chartStyle.height - padding.y}
-      stroke=#bbb
-      stroke-width=1
-    />`;
+  let yAxis = document.createElementNS("http://www.w3.org/2000/svg", "line");
+  yAxis.id = "xAxis";
+  yAxis.setAttribute("stroke", "#bbb");
+  let yAxisPos = [
+    { x1: padding.x },
+    { x2: padding.x },
+    { y1: padding.y },
+    { y2: chartStyle.height - padding.y },
+  ];
+  for (const attr of yAxisPos) {
+    let key = Object.keys(attr)[0];
+    yAxis.setAttribute(key, attr[key]);
+  }
 
   let text = "";
   let values = [minMax.min, 0, minMax.max];
@@ -49,8 +56,7 @@ export function addAxes(
       scaleFactor,
     );
   }
-
-  chart.innerHTML = yAxis + xAxis + text;
+  axisContainer.append(xAxis, yAxis);
 }
 
 function yAxisLabels(
