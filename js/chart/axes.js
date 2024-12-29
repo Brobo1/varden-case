@@ -14,7 +14,8 @@ export function addAxes(
   );
   axisContainer.id = "axisContainer";
   chart.appendChild(axisContainer);
-  console.log(axisContainer);
+
+  //Create xAxis
   let xAxis = document.createElementNS("http://www.w3.org/2000/svg", "line");
   xAxis.id = "xAxis";
   xAxis.setAttribute("stroke", "#bbb");
@@ -29,6 +30,7 @@ export function addAxes(
     xAxis.setAttribute(key, attr[key]);
   }
 
+  //Create yAxis
   let yAxis = document.createElementNS("http://www.w3.org/2000/svg", "line");
   yAxis.id = "xAxis";
   yAxis.setAttribute("stroke", "#bbb");
@@ -43,17 +45,19 @@ export function addAxes(
     yAxis.setAttribute(key, attr[key]);
   }
 
-  let text = "";
+  //Add labels to yAxis
   let values = [minMax.min, 0, minMax.max];
   for (const value of values) {
-    text += yAxisLabels(
-      value,
-      chartStyle,
-      padding,
-      centerPoint,
-      minMax,
-      scale,
-      scaleFactor,
+    axisContainer.append(
+      yAxisLabels(
+        value,
+        chartStyle,
+        padding,
+        centerPoint,
+        minMax,
+        scale,
+        scaleFactor,
+      ),
     );
   }
   axisContainer.append(xAxis, yAxis);
@@ -71,26 +75,24 @@ function yAxisLabels(
   let scaledPos =
     chartStyle.height - padding.y - (centerPoint + value * scale * scaleFactor);
 
-  let point = `
-    <text
-    x=${padding.x - 15}
-    y=${scaledPos}
-    dominant-baseline="central"
-    text-anchor="end"
-    >
-    ${value}
-    </text>
-    <line
-      id=center-axis
-      x1=${padding.x - 10}
-      x2=${padding.x - 1}
-      y1=${scaledPos}
-      y2=${scaledPos}
-      stroke=#bbb
-      stroke-width=1
-     />
+  let label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+  // label.id = "yAxisLabel";
+  label.setAttribute("x", (padding.x - 15).toString());
+  label.setAttribute("y", scaledPos.toString());
+  label.setAttribute("dominant-baseline", "central");
+  label.setAttribute("text-anchor", "end");
+  label.textContent = value;
 
-  `;
+  let dash = document.createElementNS("http://www.w3.org/2000/svg", "line");
+  dash.setAttribute("x1", (padding.x - 10).toString());
+  dash.setAttribute("x2", (padding.x - 1).toString());
+  dash.setAttribute("y1", scaledPos.toString());
+  dash.setAttribute("y2", scaledPos.toString());
+  dash.setAttribute("stroke", "#bbb");
+  dash.setAttribute("stroke-width", "1");
 
-  return point;
+  let labelDash = document.createElementNS("http://www.w3.org/2000/svg", "g");
+  labelDash.append(label, dash);
+
+  return labelDash;
 }
