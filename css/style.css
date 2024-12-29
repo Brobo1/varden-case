@@ -6,7 +6,7 @@ html {
 }
 
 body {
-  background-color: #222222;
+  background-color: #282828;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,10 +31,11 @@ main {
 }
 
 #chart-container {
+  border-radius: 5px;
   height: 500px;
   width: 90%;
   max-width: 800px;
-  background-color: #313131;
+  background-color: #444444;
 }
 
 svg {
@@ -45,5 +46,9 @@ svg {
 }
 
 .bar {
-  transition: stroke 0.3s ease;
+  transition: 0.3s ease;
+}
+
+.barNameColor {
+  transition: 0.3s ease;
 }

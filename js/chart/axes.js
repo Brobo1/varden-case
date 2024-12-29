@@ -32,7 +32,7 @@ export function addAxes(
 
   //Create yAxis
   let yAxis = document.createElementNS("http://www.w3.org/2000/svg", "line");
-  yAxis.id = "xAxis";
+  yAxis.id = "yAxis";
   yAxis.setAttribute("stroke", "#bbb");
   let yAxisPos = [
     { x1: padding.x },
@@ -49,15 +49,7 @@ export function addAxes(
   let values = [minMax.min, 0, minMax.max];
   for (const value of values) {
     axisContainer.append(
-      yAxisLabels(
-        value,
-        chartStyle,
-        padding,
-        centerPoint,
-        minMax,
-        scale,
-        scaleFactor,
-      ),
+      yAxisLabels(value, chartStyle, padding, centerPoint, scale, scaleFactor),
     );
   }
   axisContainer.append(xAxis, yAxis);
@@ -68,7 +60,6 @@ function yAxisLabels(
   chartStyle,
   padding,
   centerPoint,
-  minMax,
   scale,
   scaleFactor,
 ) {

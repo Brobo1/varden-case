@@ -2,17 +2,9 @@ import { addAxes } from "./axes.js";
 import { addBars } from "./bar/bars.js";
 import { getData } from "../data.js";
 
-export async function createChart(chartData) {
+export async function createChart(chartData, barColors, strokeColor) {
   const data = await getData();
-  let barColors = [
-    "#1f77b4",
-    "#ff7f0e",
-    "#2ca02c",
-    "#d62728",
-    "#9467bd",
-    "#8c564b",
-    "#e377c2",
-  ];
+
   let padding = { x: 80, y: 50 };
   let scaleFactor = 0.9;
 
@@ -35,6 +27,7 @@ export async function createChart(chartData) {
     };
   }
 
+  console.log(minMax);
   let range = minMax.max - minMax.min;
 
   let scale = chartStyle.yAxis / range;
@@ -51,6 +44,8 @@ export async function createChart(chartData) {
     scale,
     scaleFactor,
     barColors,
+    strokeColor,
+    chartData,
   );
   addAxes(chartStyle, padding, offset, minMax, scale, scaleFactor);
 }

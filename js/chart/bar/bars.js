@@ -12,19 +12,20 @@ function addBar(
   offset,
   isNegative,
   color,
+  strokeColor,
 ) {
   const barsContainer = document.getElementById("barsContainer");
   let centerPoint = chartStyle.height - padding.y - offset;
   let barStartPoint = isNegative ? centerPoint : centerPoint - barHeight;
 
   const bar = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-  bar.setAttribute("class", `bar ${city.toLowerCase()}`);
+  bar.setAttribute("class", `bar ${city}`);
   bar.setAttribute("x", (padding.x + spacing).toString());
   bar.setAttribute("y", barStartPoint.toString());
   bar.setAttribute("width", width.toString());
   bar.setAttribute("height", barHeight.toString());
   bar.setAttribute("fill", color);
-  bar.setAttribute("stroke", "#fff");
+  bar.setAttribute("stroke", strokeColor.noHover);
   bar.setAttribute("stroke-width", "1");
 
   barsContainer.appendChild(bar);
@@ -39,6 +40,8 @@ export function addBars(
   scale,
   scaleFactor,
   barColors,
+  strokeColor,
+  chartData,
 ) {
   let spacing = 0;
   let numBars = Object.keys(data).length;
@@ -63,10 +66,10 @@ export function addBars(
   for (const city in data) {
     spacing += spaceBetweenBars;
 
-    let value = data[city].dMonth;
+    let value = data[city][chartData];
     let barHeight = Math.abs(value * scale) * scaleFactor;
     let isNegative = value < 0;
-    let color = barColors.pop();
+    let color = barColors[city];
     addBar(
       chartStyle,
       padding,
@@ -76,10 +79,18 @@ export function addBars(
       width,
       offset,
       isNegative,
-      color,
+      color.fill,
+      strokeColor,
     );
     barNameXPos +=
-      addBarName(chartStyle, padding, city, barNameXPos, color) + 20;
+      addBarName(
+        chartStyle,
+        padding,
+        city,
+        barNameXPos,
+        color.fill,
+        strokeColor,
+      ) + 20;
 
     spacing += width;
   }
