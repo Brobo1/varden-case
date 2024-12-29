@@ -41,7 +41,7 @@ export function addBars(
   let totalSpacing = chartStyle.xAxis - numBars * width;
   let spaceBetweenBars = totalSpacing / (numBars + 1);
 
-  let barNameXPos = padding.x;
+  let barNameXPos = 0;
   let barNamesContainer = document.createElementNS(
     "http://www.w3.org/2000/svg",
     "svg",
@@ -73,8 +73,13 @@ export function addBars(
       offset,
       isNegative,
     );
-    barNameXPos += addBarName(chartStyle, padding, city, barNameXPos) + 5;
+    barNameXPos += addBarName(chartStyle, padding, city, barNameXPos) + 20;
 
     spacing += width;
   }
+
+  barNamesContainer.setAttribute(
+    "x",
+    `${(chartStyle.width - barNamesContainer.getBBox().width) / 2}`,
+  );
 }
