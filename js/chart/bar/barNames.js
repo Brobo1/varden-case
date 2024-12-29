@@ -13,6 +13,7 @@ export function addBarName(chartStyle, padding, city, barNameXPos, color) {
     "http://www.w3.org/2000/svg",
     "rect",
   );
+  barNameColor.setAttribute("class", `barNameColor ${city.toLowerCase()}`);
   barNameColor.setAttribute("x", barNameXPos.toString());
   barNameColor.setAttribute("y", (chartStyle.height - 20).toString());
   barNameColor.setAttribute("width", "10");

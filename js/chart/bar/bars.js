@@ -18,6 +18,7 @@ function addBar(
   let barStartPoint = isNegative ? centerPoint : centerPoint - barHeight;
 
   const bar = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+  bar.setAttribute("class", `bar ${city.toLowerCase()}`);
   bar.setAttribute("x", (padding.x + spacing).toString());
   bar.setAttribute("y", barStartPoint.toString());
   bar.setAttribute("width", width.toString());
