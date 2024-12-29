@@ -7,15 +7,15 @@ let chartData = "Endring siste måned";
 const data = await getData();
 
 let strokeColor = {
-  noHover: "#bbbbbb",
-  hover: "#4b4b4b",
+  noHover: "#6e6e6e",
+  hover: "#bbbbbb",
 };
 
 let barColors = {
   Oslo: {
     fill: "#1f77b4",
     hover: "#175a8a",
-    background: "rgba(31,119,180,0.6)",
+    background: "#1f77b4",
   },
   Bergen: {
     fill: "#ff7f0e",

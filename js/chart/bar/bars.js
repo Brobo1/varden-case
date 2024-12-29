@@ -47,6 +47,7 @@ export function addBars(
   let numBars = Object.keys(data).length;
   let totalSpacing = chartStyle.xAxis - numBars * width;
   let spaceBetweenBars = totalSpacing / (numBars + 1);
+  let textWrap = 0;
 
   let barNameXPos = 4;
   let barNamesContainer = document.createElementNS(
@@ -63,13 +64,16 @@ export function addBars(
   barsContainer.id = "barsContainer";
   chart.appendChild(barsContainer);
 
+  let wrapLineWidth = 0;
   for (const city in data) {
     spacing += spaceBetweenBars;
+    console.log(wrapLineWidth);
 
     let value = data[city][chartData];
     let barHeight = Math.abs(value * scale) * scaleFactor;
     let isNegative = value < 0;
     let color = barColors[city];
+
     addBar(
       chartStyle,
       padding,
@@ -82,7 +86,8 @@ export function addBars(
       color.fill,
       strokeColor,
     );
-    barNameXPos +=
+
+    let barNameWidth =
       addBarName(
         chartStyle,
         padding,
@@ -90,7 +95,16 @@ export function addBars(
         barNameXPos,
         color.fill,
         strokeColor,
+        textWrap,
       ) + 26;
+
+    wrapLineWidth += barNameWidth;
+    barNameXPos += barNameWidth;
+    if (wrapLineWidth > 300) {
+      wrapLineWidth = 0;
+      textWrap += 21;
+      barNameXPos = 4;
+    }
 
     spacing += width;
   }
