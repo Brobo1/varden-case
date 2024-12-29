@@ -3,7 +3,7 @@ import { addBars } from "./bar/bars.js";
 import { chartHeader } from "./header/chartHeader.js";
 
 export function createChart(data, chartData, barColors, strokeColor) {
-  let padding = { x: 80, y: 50 };
+  let padding = { x: 100, y: 70 };
   let scaleFactor = 0.9;
 
   const chart = document.getElementById("chart");

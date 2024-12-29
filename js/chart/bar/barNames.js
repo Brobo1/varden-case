@@ -8,7 +8,6 @@ export function addBarName(
   textWrap,
 ) {
   const barNamesContainer = document.getElementById("barNamesContainer");
-  let barNamesBBox = barNamesContainer.getBBox();
 
   const barName = document.createElementNS(
     "http://www.w3.org/2000/svg",
