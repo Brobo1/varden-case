@@ -28,5 +28,5 @@ export function createChart(data, dataKey) {
   let offset = minMax.min < 0 ? scale * Math.abs(minMax.min) : 0;
 
   addBars(data, barWidth, offset, scale, dataKey);
-  addAxes(dimensions, offset, minMax, scale);
+  addAxes(offset, minMax, scale);
 }

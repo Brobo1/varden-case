@@ -1,10 +1,12 @@
 import { createYAxisLabel } from "../util/axisUtil.js";
 import { padding } from "../constants/chartConsts.js";
 import { newSvgElem } from "../util/svgUtil.js";
+import { chartStyle } from "../util/chartUtil.js";
 
 const chart = document.getElementById("chart");
 
-export function addAxes(chartStyle, centerPoint, minMax, scale) {
+export function addAxes(centerPoint, minMax, scale) {
+  const dimensions = chartStyle();
   const axisContainer = newSvgElem("svg", {}, []);
   axisContainer.id = "axisContainer";
   chart.appendChild(axisContainer);
@@ -12,9 +14,9 @@ export function addAxes(chartStyle, centerPoint, minMax, scale) {
   //Create xAxis
   const xAxis = newSvgElem("line", {
     x1: padding.x + 1,
-    x2: chartStyle.width - padding.x,
-    y1: chartStyle.height - padding.y - centerPoint,
-    y2: chartStyle.height - padding.y - centerPoint,
+    x2: dimensions.width - padding.x,
+    y1: dimensions.height - padding.y - centerPoint,
+    y2: dimensions.height - padding.y - centerPoint,
     stroke: "#bbb",
   });
   xAxis.id = "xAxis";
@@ -24,7 +26,7 @@ export function addAxes(chartStyle, centerPoint, minMax, scale) {
     x1: padding.x,
     x2: padding.x,
     y1: padding.y,
-    y2: chartStyle.height - padding.y + 0.5,
+    y2: dimensions.height - padding.y + 0.5,
     stroke: "#bbb",
   });
   yAxis.id = "yAxis";

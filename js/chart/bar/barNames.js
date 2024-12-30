@@ -23,7 +23,10 @@ export function addBarName(city, barNameXPos, textWrap) {
     "stroke-width": 1,
   });
 
-  const barNameContainer = newSvgElem("g", {}, [barName, barNameColor]);
+  const barNameContainer = newSvgElem("g", { class: `barName ${city}` }, [
+    barName,
+    barNameColor,
+  ]);
 
   const barNamesContainer = document.getElementById("barNamesContainer");
   barNamesContainer.appendChild(barNameContainer);
