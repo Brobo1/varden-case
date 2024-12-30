@@ -1,4 +1,5 @@
 import { addBarName } from "./barNames.js";
+import { setSvgAttr, newSvgElem } from "../../util/svgUtil.js";
 
 const chart = document.getElementById("chart");
 
@@ -18,15 +19,16 @@ function addBar(
   let centerPoint = chartStyle.height - padding.y - offset;
   let barStartPoint = isNegative ? centerPoint : centerPoint - barHeight;
 
-  const bar = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-  bar.setAttribute("class", `bar ${city}`);
-  bar.setAttribute("x", (padding.x + spacing).toString());
-  bar.setAttribute("y", barStartPoint.toString());
-  bar.setAttribute("width", width.toString());
-  bar.setAttribute("height", barHeight.toString());
-  bar.setAttribute("fill", color);
-  bar.setAttribute("stroke", strokeColor.noHover);
-  bar.setAttribute("stroke-width", "1");
+  const bar = newSvgElem("rect", {
+    class: `bar ${city}`,
+    x: padding.x + spacing,
+    y: barStartPoint,
+    width: width,
+    height: barHeight,
+    fill: color,
+    stroke: strokeColor.noHover,
+    "stroke-width": 1,
+  });
 
   barsContainer.appendChild(bar);
 }
