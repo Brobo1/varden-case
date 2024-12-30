@@ -1,16 +1,13 @@
 import { measureSvg, newSvgElem } from "./svgUtil.js";
+import { padding, scaleFactor } from "../constants/chartConsts.js";
+import { chartStyle } from "./chartUtil.js";
 
 //create labels for the y-axis
-export function createYAxisLabel(
-  value,
-  chartStyle,
-  padding,
-  centerPoint,
-  scale,
-  scaleFactor,
-) {
+export function createYAxisLabel(value, centerPoint, scale) {
+  let dimensions = chartStyle();
+
   const scaledPos =
-    chartStyle.height - padding.y - (centerPoint + value * scale * scaleFactor);
+    dimensions.height - padding.y - (centerPoint + value * scale * scaleFactor);
 
   const label = newSvgElem("text", {
     x: padding.x - 17,

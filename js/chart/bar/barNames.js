@@ -1,8 +1,8 @@
 import { newSvgElem } from "../../util/svgUtil.js";
-import { strokeColor } from "../../constants/colors.js";
+import { barColors, strokeColor } from "../../constants/colors.js";
 import { chartStyle } from "../../util/chartUtil.js";
 
-export function addBarName(city, barNameXPos, color, textWrap) {
+export function addBarName(city, barNameXPos, textWrap) {
   const dimensions = chartStyle();
 
   const barName = newSvgElem("text", {
@@ -18,7 +18,7 @@ export function addBarName(city, barNameXPos, color, textWrap) {
     y: dimensions.height - 53 + textWrap,
     width: 12,
     height: 12,
-    fill: color,
+    fill: barColors[city].fill,
     stroke: strokeColor.noHover,
     "stroke-width": 1,
   });
@@ -32,7 +32,7 @@ export function addBarName(city, barNameXPos, color, textWrap) {
 
   const background = newSvgElem("rect", {
     class: `barNameBg ${city}`,
-    x: barNameBBox.x.toString() - 4,
+    x: barNameBBox.x - 4,
     y: barNameBBox.y,
     width: barNameBBox.width + 8,
     height: barNameBBox.height,

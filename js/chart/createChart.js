@@ -6,7 +6,7 @@ import { clearChart, chartStyle } from "../util/chartUtil.js";
 import { padding } from "../constants/chartConsts.js";
 
 export function createChart(data, dataKey) {
-  let scaleFactor = 0.9;
+  let barWidth = 30;
 
   const chart = document.getElementById("chart");
   const dimensions = chartStyle();
@@ -24,12 +24,9 @@ export function createChart(data, dataKey) {
   }
 
   let range = minMax.min < 0 ? minMax.max - minMax.min : minMax.max;
-
   let scale = dimensions.yAxis / range;
   let offset = minMax.min < 0 ? scale * Math.abs(minMax.min) : 0;
 
-  let barWidth = 30;
-
   addBars(data, barWidth, offset, scale, dataKey);
-  addAxes(dimensions, padding, offset, minMax, scale, scaleFactor);
+  addAxes(dimensions, offset, minMax, scale);
 }

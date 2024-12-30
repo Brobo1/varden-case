@@ -6,7 +6,8 @@ import { barColors, strokeColor } from "../../constants/colors.js";
 
 const chart = document.getElementById("chart");
 
-function addBar(barHeight, city, spacing, width, offset, isNegative, color) {
+// Create bars
+function addBar(barHeight, city, spacing, width, offset, isNegative) {
   const barsContainer = document.getElementById("barsContainer");
   let centerPoint = chartStyle().height - padding.y - offset;
   let barStartPoint = isNegative ? centerPoint : centerPoint - barHeight;
@@ -17,7 +18,7 @@ function addBar(barHeight, city, spacing, width, offset, isNegative, color) {
     y: barStartPoint,
     width: width,
     height: barHeight,
-    fill: color,
+    fill: barColors[city].fill,
     stroke: strokeColor.noHover,
     "stroke-width": 1,
   });
@@ -25,6 +26,7 @@ function addBar(barHeight, city, spacing, width, offset, isNegative, color) {
   barsContainer.appendChild(bar);
 }
 
+// create container for bars and append bars to it
 export function addBars(data, barWidth, offset, scale, chartKey) {
   let dimensions = chartStyle();
   let spacing = 0;
@@ -54,11 +56,10 @@ export function addBars(data, barWidth, offset, scale, chartKey) {
     let value = data[city][chartKey];
     let barHeight = Math.abs(value * scale) * scaleFactor;
     let isNegative = value < 0;
-    let color = barColors[city];
 
-    addBar(barHeight, city, spacing, barWidth, offset, isNegative, color.fill);
+    addBar(barHeight, city, spacing, barWidth, offset, isNegative);
 
-    let barNameWidth = addBarName(city, barNameXPos, color.fill, textWrap) + 28;
+    let barNameWidth = addBarName(city, barNameXPos, textWrap) + 28;
 
     wrapLineWidth += barNameWidth;
     barNameXPos += barNameWidth;
