@@ -21,7 +21,10 @@ export function createYAxisLabel(
   });
   label.textContent = value;
 
+  const tempCont = document.getElementById("temp-svg");
+  tempCont.appendChild(label);
   const bBox = label.getBBox();
+  tempCont.removeChild(label);
 
   const background = newSvgElem("rect", {
     x: bBox.x - 4,

@@ -17,6 +17,11 @@ body {
 /*  height: 100%;*/
 /*}*/
 
+#temp-svg {
+  visibility: hidden;
+  position: absolute;
+}
+
 h1 {
   font-weight: 400;
 }
