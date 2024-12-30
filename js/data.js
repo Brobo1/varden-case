@@ -23,7 +23,7 @@
 
 export async function getData() {
   try {
-    const res = await fetch("./data.json").then((res) => res.json());
+    const res = await fetch("./data/data.json").then((res) => res.json());
     return transformData(res);
   } catch (err) {
     console.error("Error fetching JSON:", err);
