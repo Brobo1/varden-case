@@ -1,4 +1,5 @@
 import { crosshair } from "./crosshair.js";
+import { createYAxisLabel } from "../util/axisUtil.js";
 
 const chart = document.getElementById("chart");
 
@@ -51,60 +52,68 @@ export function addAxes(
   let values = [minMax.min, 0, minMax.max];
   for (const value of values) {
     axisContainer.append(
-      yAxisLabels(value, chartStyle, padding, centerPoint, scale, scaleFactor),
+      // yAxisLabels(value, chartStyle, padding, centerPoint, scale, scaleFactor),
+      createYAxisLabel(
+        value,
+        chartStyle,
+        padding,
+        centerPoint,
+        scale,
+        scaleFactor,
+      ),
     );
   }
 
-  crosshair();
+  // crosshair();
   axisContainer.append(xAxis, yAxis);
 }
 
-export function yAxisLabels(
-  value,
-  chartStyle,
-  padding,
-  centerPoint,
-  scale,
-  scaleFactor,
-) {
-  let scaledPos =
-    chartStyle.height - padding.y - (centerPoint + value * scale * scaleFactor);
-
-  let label = document.createElementNS("http://www.w3.org/2000/svg", "text");
-  label.setAttribute("x", (padding.x - 17).toString());
-  label.setAttribute("y", scaledPos.toString());
-  label.setAttribute("dominant-baseline", "central");
-  label.setAttribute("text-anchor", "end");
-  label.setAttribute("color", "white");
-  label.setAttribute("class", "axisLabel");
-  label.textContent = value + "%";
-
-  chart.appendChild(label);
-  let bBox = label.getBBox();
-  chart.removeChild(label);
-
-  let background = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "rect",
-  );
-  background.setAttribute("x", (bBox.x - 4).toString());
-  background.setAttribute("y", (bBox.y - 2).toString());
-  background.setAttribute("width", (bBox.width + 8).toString());
-  background.setAttribute("height", (bBox.height + 4).toString());
-  background.setAttribute("fill", "#9f9f9f");
-  background.setAttribute("rx", "3");
-  // background.setAttribute("");
-
-  let dash = document.createElementNS("http://www.w3.org/2000/svg", "line");
-  dash.setAttribute("x1", (padding.x - 10).toString());
-  dash.setAttribute("x2", (padding.x - 1).toString());
-  dash.setAttribute("y1", scaledPos.toString());
-  dash.setAttribute("y2", scaledPos.toString());
-  dash.setAttribute("stroke", "#bbb");
-  dash.setAttribute("stroke-width", "1");
-
-  let labelDash = document.createElementNS("http://www.w3.org/2000/svg", "g");
-  labelDash.append(background, label, dash);
-
-  return labelDash;
-}
+// export function yAxisLabels(
+//   value,
+//   chartStyle,
+//   padding,
+//   centerPoint,
+//   scale,
+//   scaleFactor,
+// ) {
+//   let scaledPos =
+//     chartStyle.height - padding.y - (centerPoint + value * scale * scaleFactor);
+//
+//   let label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+//   label.setAttribute("x", (padding.x - 17).toString());
+//   label.setAttribute("y", scaledPos.toString());
+//   label.setAttribute("dominant-baseline", "central");
+//   label.setAttribute("text-anchor", "end");
+//   label.setAttribute("color", "white");
+//   label.setAttribute("class", "axisLabel");
+//   label.textContent = value + "%";
+//
+//   chart.appendChild(label);
+//   let bBox = label.getBBox();
+//   chart.removeChild(label);
+//
+//   let background = document.createElementNS(
+//     "http://www.w3.org/2000/svg",
+//     "rect",
+//   );
+//   background.setAttribute("x", (bBox.x - 4).toString());
+//   background.setAttribute("y", (bBox.y - 2).toString());
+//   background.setAttribute("width", (bBox.width + 8).toString());
+//   background.setAttribute("height", (bBox.height + 4).toString());
+//   background.setAttribute("fill", "#9f9f9f");
+//   background.setAttribute("rx", "3");
+//   // background.setAttribute("");
+//
+//   let dash = document.createElementNS("http://www.w3.org/2000/svg", "line");
+//   dash.setAttribute("x1", (padding.x - 10).toString());
+//   dash.setAttribute("x2", (padding.x - 1).toString());
+//   dash.setAttribute("y1", scaledPos.toString());
+//   dash.setAttribute("y2", scaledPos.toString());
+//   dash.setAttribute("stroke", "#bbb");
+//   dash.setAttribute("stroke-width", "1");
+//
+//   let labelDash = document.createElementNS("http://www.w3.org/2000/svg", "g");
+//   labelDash.append(background, label, dash);
+//
+//   return labelDash;
+// }
