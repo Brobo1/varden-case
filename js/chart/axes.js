@@ -52,6 +52,7 @@ export function addAxes(
       yAxisLabels(value, chartStyle, padding, centerPoint, scale, scaleFactor),
     );
   }
+
   axisContainer.append(xAxis, yAxis);
 }
 

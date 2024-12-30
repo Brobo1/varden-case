@@ -1,6 +1,7 @@
 import { addAxes } from "./axes.js";
 import { addBars } from "./bar/bars.js";
 import { chartHeader } from "./header/chartHeader.js";
+import { crosshair } from "./crosshair.js";
 
 export function createChart(data, chartData, barColors, strokeColor) {
   let padding = { x: 100, y: 70 };
@@ -16,7 +17,22 @@ export function createChart(data, chartData, barColors, strokeColor) {
   };
 
   //redraw the chart
-  chart.innerHTML = "";
+  while (chart.firstChild) {
+    chart.removeChild(chart.firstChild);
+  }
+
+  let eventCover = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "rect",
+  );
+  eventCover.setAttribute("x", chartStyle.xAxis.toString());
+  eventCover.setAttribute("y", chartStyle.yAxis.toString());
+  eventCover.setAttribute("width", chartStyle.width.toString());
+  eventCover.setAttribute("height", chartStyle.height.toString());
+
+  // chart.append(eventCover);
+
+  crosshair();
 
   let minMax = { min: Infinity, max: -Infinity };
 

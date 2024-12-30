@@ -2,6 +2,7 @@ import { createChart } from "./chart/createChart.js";
 import { getData } from "./data.js";
 import { chartHeader } from "./chart/header/chartHeader.js";
 
+let chart = document.getElementById("chart");
 let chartData = "Endring siste måned";
 
 const data = await getData();
@@ -52,20 +53,18 @@ let barColors = {
 chartHeader(data);
 createChart(data, chartData, barColors, strokeColor);
 
-//Redraw the chart if window is resized
-window.addEventListener("resize", () => {
+function onWindowResize() {
   createChart(data, chartData, barColors, strokeColor);
-});
+}
 
-//redraw the chart if dropdown has been changed
-document.addEventListener("change", (e) => {
+function onDropdownChange(e) {
   if (e.target.id === "chart-dropdown") {
     chartData = e.target.value;
     createChart(data, chartData, barColors, strokeColor);
   }
-});
+}
 
-window.addEventListener("mouseover", (e) => {
+function onBarMouseOver(e) {
   let target = e.target.classList;
 
   if (target.contains("bar")) {
@@ -79,9 +78,9 @@ window.addEventListener("mouseover", (e) => {
     let nameBgColor = document.querySelector(`.barNameBg.${target[1]}`);
     nameBgColor.setAttribute("fill", barColors[target[1]].background);
   }
-});
+}
 
-window.addEventListener("mouseout", (e) => {
+function onBarMouseOut(e) {
   let target = e.target.classList;
 
   if (target.contains("bar")) {
@@ -95,4 +94,14 @@ window.addEventListener("mouseout", (e) => {
     let nameBgColor = document.querySelector(`.barNameBg.${target[1]}`);
     nameBgColor.setAttribute("fill", "#9b9b9b");
   }
-});
+}
+
+//Redraw the chart if window is resized
+window.addEventListener("resize", onWindowResize);
+
+//redraw the chart if dropdown has been changed
+document.addEventListener("change", onDropdownChange);
+
+chart.addEventListener("mouseover", onBarMouseOver);
+
+chart.addEventListener("mouseout", onBarMouseOut);

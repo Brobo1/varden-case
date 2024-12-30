@@ -67,7 +67,6 @@ export function addBars(
   let wrapLineWidth = 0;
   for (const city in data) {
     spacing += spaceBetweenBars;
-    console.log(wrapLineWidth);
 
     let value = data[city][chartData];
     let barHeight = Math.abs(value * scale) * scaleFactor;
