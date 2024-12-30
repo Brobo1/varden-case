@@ -80,7 +80,7 @@ function onBarMouseOver(e) {
     nameColor.setAttribute("fill", barColors[target[1]].hover);
 
     let nameBgColor = document.querySelector(`.barNameBg.${target[1]}`);
-    nameBgColor.setAttribute("fill", "#c7c7c7");
+    nameBgColor.setAttribute("fill", barColors[target[1]].background);
   }
 }
 chart.addEventListener("mouseover", onBarMouseOver);
@@ -97,7 +97,7 @@ function onBarMouseOut(e) {
     nameColor.setAttribute("fill", barColors[target[1]].fill);
 
     let nameBgColor = document.querySelector(`.barNameBg.${target[1]}`);
-    nameBgColor.setAttribute("fill", "#6b6b6b");
+    nameBgColor.setAttribute("fill", "#9b9b9b");
   }
 }
 chart.addEventListener("mouseout", onBarMouseOut);
