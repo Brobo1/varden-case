@@ -1,5 +1,6 @@
 import { measureSvg, newSvgElem } from "./svgUtil.js";
 
+//create labels for the y-axis
 export function createYAxisLabel(
   value,
   chartStyle,

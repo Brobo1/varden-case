@@ -1,3 +1,5 @@
+import { newSvgElem } from "../../util/svgUtil.js";
+
 export function addBarName(
   chartStyle,
   padding,
@@ -7,52 +9,40 @@ export function addBarName(
   strokeColor,
   textWrap,
 ) {
-  const barNamesContainer = document.getElementById("barNamesContainer");
-
-  const barName = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "text",
-  );
+  const barName = newSvgElem("text", {
+    x: barNameXPos + 16,
+    y: chartStyle.height - 40 + textWrap,
+    "font-size": 20,
+  });
   barName.textContent = city;
-  barName.setAttribute("x", (barNameXPos + 13).toString());
-  barName.setAttribute("y", (chartStyle.height - 40 + textWrap).toString());
 
-  const barNameColor = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "rect",
-  );
-  barNameColor.setAttribute("class", `barNameColor ${city}`);
-  barNameColor.setAttribute("x", barNameXPos.toString());
-  barNameColor.setAttribute(
-    "y",
-    (chartStyle.height - 50 + textWrap).toString(),
-  );
-  barNameColor.setAttribute("width", "10");
-  barNameColor.setAttribute("height", "10");
-  barNameColor.setAttribute("fill", color);
-  barNameColor.setAttribute("stroke", strokeColor.noHover);
-  barNameColor.setAttribute("stroke-width", "1");
+  const barNameColor = newSvgElem("rect", {
+    class: `barNameColor ${city}`,
+    x: barNameXPos,
+    y: chartStyle.height - 53 + textWrap,
+    width: 12,
+    height: 12,
+    fill: color,
+    stroke: strokeColor.noHover,
+    "stroke-width": 1,
+  });
 
-  const barNameContainer = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "svg",
-  );
-  barNameContainer.append(barNameColor, barName);
+  const barNameContainer = newSvgElem("g", {}, [barName, barNameColor]);
 
+  const barNamesContainer = document.getElementById("barNamesContainer");
   barNamesContainer.appendChild(barNameContainer);
 
   let barNameBBox = barNameContainer.getBBox();
-  let background = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "rect",
-  );
-  background.setAttribute("class", `barNameBg ${city}`);
-  background.setAttribute("x", (barNameBBox.x.toString() - 4).toString());
-  background.setAttribute("y", barNameBBox.y.toString());
-  background.setAttribute("width", (barNameBBox.width + 8).toString());
-  background.setAttribute("height", barNameBBox.height.toString());
-  background.setAttribute("fill", "#9b9b9b");
-  background.setAttribute("rx", "3");
+
+  const background = newSvgElem("rect", {
+    class: `barNameBg ${city}`,
+    x: barNameBBox.x.toString() - 4,
+    y: barNameBBox.y,
+    width: barNameBBox.width + 8,
+    height: barNameBBox.height,
+    fill: "#9b9b9b",
+    rx: 3,
+  });
   barNameContainer.prepend(background);
 
   return barName.getBBox().width;

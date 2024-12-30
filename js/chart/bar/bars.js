@@ -103,7 +103,7 @@ export function addBars(
     barNameXPos += barNameWidth;
     if (wrapLineWidth > 300) {
       wrapLineWidth = 0;
-      textWrap += 21;
+      textWrap += 28;
       barNameXPos = 4;
     }
 
