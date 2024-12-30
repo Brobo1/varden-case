@@ -1,5 +1,6 @@
 import { addBarName } from "./barNames.js";
 import { newSvgElem } from "../../util/svgUtil.js";
+import { scaleFactor } from "../../constants/chartConsts.js";
 
 const chart = document.getElementById("chart");
 
@@ -40,7 +41,6 @@ export function addBars(
   width,
   offset,
   scale,
-  scaleFactor,
   barColors,
   strokeColor,
   chartData,

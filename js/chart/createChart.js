@@ -2,33 +2,17 @@ import { addAxes } from "./axes.js";
 import { addBars } from "./bar/bars.js";
 import { chartHeader } from "./header/chartHeader.js";
 import { crosshair } from "./crosshair.js";
+import { clearChart, chartStyle } from "../util/chartUtil.js";
+import { padding } from "../constants/chartConsts.js";
 
 export function createChart(data, chartData, barColors, strokeColor) {
-  let padding = { x: 100, y: 70 };
   let scaleFactor = 0.9;
 
   const chart = document.getElementById("chart");
-  let chartStyles = window.getComputedStyle(chart);
-  let chartStyle = {
-    width: parseInt(chartStyles.width),
-    height: parseInt(chartStyles.height),
-    xAxis: parseInt(chartStyles.width) - padding.x * 2,
-    yAxis: parseInt(chartStyles.height) - padding.y * 2,
-  };
+  const dimensions = chartStyle();
 
   //redraw the chart
-  while (chart.firstChild) {
-    chart.removeChild(chart.firstChild);
-  }
-
-  let eventCover = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "rect",
-  );
-  eventCover.setAttribute("x", chartStyle.xAxis.toString());
-  eventCover.setAttribute("y", chartStyle.yAxis.toString());
-  eventCover.setAttribute("width", chartStyle.width.toString());
-  eventCover.setAttribute("height", chartStyle.height.toString());
+  clearChart(chart);
 
   let minMax = { min: Infinity, max: -Infinity };
 
@@ -41,13 +25,13 @@ export function createChart(data, chartData, barColors, strokeColor) {
 
   let range = minMax.min < 0 ? minMax.max - minMax.min : minMax.max;
 
-  let scale = chartStyle.yAxis / range;
+  let scale = dimensions.yAxis / range;
   let offset = minMax.min < 0 ? scale * Math.abs(minMax.min) : 0;
 
   let barWidth = 30;
 
   addBars(
-    chartStyle,
+    dimensions,
     data,
     padding,
     barWidth,
@@ -58,5 +42,5 @@ export function createChart(data, chartData, barColors, strokeColor) {
     strokeColor,
     chartData,
   );
-  addAxes(chartStyle, padding, offset, minMax, scale, scaleFactor);
+  addAxes(dimensions, padding, offset, minMax, scale, scaleFactor);
 }
