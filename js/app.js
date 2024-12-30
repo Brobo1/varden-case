@@ -53,16 +53,20 @@ let barColors = {
 chartHeader(data);
 createChart(data, chartData, barColors, strokeColor);
 
+// //Redraw the chart if window is resized
 function onWindowResize() {
   createChart(data, chartData, barColors, strokeColor);
 }
+window.addEventListener("resize", onWindowResize);
 
+// //redraw the chart if dropdown has been changed
 function onDropdownChange(e) {
   if (e.target.id === "chart-dropdown") {
     chartData = e.target.value;
     createChart(data, chartData, barColors, strokeColor);
   }
 }
+document.addEventListener("change", onDropdownChange);
 
 function onBarMouseOver(e) {
   let target = e.target.classList;
@@ -79,6 +83,7 @@ function onBarMouseOver(e) {
     nameBgColor.setAttribute("fill", barColors[target[1]].background);
   }
 }
+chart.addEventListener("mouseover", onBarMouseOver);
 
 function onBarMouseOut(e) {
   let target = e.target.classList;
@@ -95,13 +100,4 @@ function onBarMouseOut(e) {
     nameBgColor.setAttribute("fill", "#9b9b9b");
   }
 }
-
-//Redraw the chart if window is resized
-window.addEventListener("resize", onWindowResize);
-
-//redraw the chart if dropdown has been changed
-document.addEventListener("change", onDropdownChange);
-
-chart.addEventListener("mouseover", onBarMouseOver);
-
 chart.addEventListener("mouseout", onBarMouseOut);

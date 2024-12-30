@@ -1,3 +1,5 @@
+import { crosshair } from "./crosshair.js";
+
 const chart = document.getElementById("chart");
 
 export function addAxes(
@@ -53,10 +55,11 @@ export function addAxes(
     );
   }
 
+  crosshair();
   axisContainer.append(xAxis, yAxis);
 }
 
-function yAxisLabels(
+export function yAxisLabels(
   value,
   chartStyle,
   padding,

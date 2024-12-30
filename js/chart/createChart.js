@@ -30,10 +30,6 @@ export function createChart(data, chartData, barColors, strokeColor) {
   eventCover.setAttribute("width", chartStyle.width.toString());
   eventCover.setAttribute("height", chartStyle.height.toString());
 
-  // chart.append(eventCover);
-
-  crosshair();
-
   let minMax = { min: Infinity, max: -Infinity };
 
   for (const city in data) {

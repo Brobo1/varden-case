@@ -7,12 +7,11 @@ function onMouseMove(e) {
   let mousePos = e.clientY;
   const yPos = Math.round(mousePos - rect.y);
   if (coord !== yPos) {
-    console.log(yPos);
   }
   coord = yPos;
 }
+
 export function crosshair() {
   chart.removeEventListener("mousemove", onMouseMove);
-
   chart.addEventListener("mousemove", onMouseMove);
 }
