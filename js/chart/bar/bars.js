@@ -1,23 +1,14 @@
 import { addBarName } from "./barNames.js";
 import { newSvgElem } from "../../util/svgUtil.js";
-import { scaleFactor } from "../../constants/chartConsts.js";
+import { padding, scaleFactor } from "../../constants/chartConsts.js";
+import { chartStyle } from "../../util/chartUtil.js";
+import { barColors, strokeColor } from "../../constants/colors.js";
 
 const chart = document.getElementById("chart");
 
-function addBar(
-  chartStyle,
-  padding,
-  barHeight,
-  city,
-  spacing,
-  width,
-  offset,
-  isNegative,
-  color,
-  strokeColor,
-) {
+function addBar(barHeight, city, spacing, width, offset, isNegative, color) {
   const barsContainer = document.getElementById("barsContainer");
-  let centerPoint = chartStyle.height - padding.y - offset;
+  let centerPoint = chartStyle().height - padding.y - offset;
   let barStartPoint = isNegative ? centerPoint : centerPoint - barHeight;
 
   const bar = newSvgElem("rect", {
@@ -34,28 +25,18 @@ function addBar(
   barsContainer.appendChild(bar);
 }
 
-export function addBars(
-  chartStyle,
-  data,
-  padding,
-  width,
-  offset,
-  scale,
-  barColors,
-  strokeColor,
-  chartData,
-) {
+export function addBars(data, barWidth, offset, scale, chartKey) {
+  let dimensions = chartStyle();
   let spacing = 0;
   let numBars = Object.keys(data).length;
-  let totalSpacing = chartStyle.xAxis - numBars * width;
+  let totalSpacing = dimensions.xAxis - numBars * barWidth;
   let spaceBetweenBars = totalSpacing / (numBars + 1);
   let textWrap = 0;
 
   let barNameXPos = 4;
-  let barNamesContainer = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "svg",
-  );
+
+  const barNamesContainer = newSvgElem("svg", {}, []);
+
   barNamesContainer.id = "barNamesContainer";
   chart.appendChild(barNamesContainer);
 
@@ -70,34 +51,14 @@ export function addBars(
   for (const city in data) {
     spacing += spaceBetweenBars;
 
-    let value = data[city][chartData];
+    let value = data[city][chartKey];
     let barHeight = Math.abs(value * scale) * scaleFactor;
     let isNegative = value < 0;
     let color = barColors[city];
 
-    addBar(
-      chartStyle,
-      padding,
-      barHeight,
-      city,
-      spacing,
-      width,
-      offset,
-      isNegative,
-      color.fill,
-      strokeColor,
-    );
+    addBar(barHeight, city, spacing, barWidth, offset, isNegative, color.fill);
 
-    let barNameWidth =
-      addBarName(
-        chartStyle,
-        padding,
-        city,
-        barNameXPos,
-        color.fill,
-        strokeColor,
-        textWrap,
-      ) + 28;
+    let barNameWidth = addBarName(city, barNameXPos, color.fill, textWrap) + 28;
 
     wrapLineWidth += barNameWidth;
     barNameXPos += barNameWidth;
@@ -107,11 +68,11 @@ export function addBars(
       barNameXPos = 4;
     }
 
-    spacing += width;
+    spacing += barWidth;
   }
 
   barNamesContainer.setAttribute(
     "x",
-    `${(chartStyle.width - barNamesContainer.getBBox().width) / 2}`,
+    `${(dimensions.width - barNamesContainer.getBBox().width) / 2}`,
   );
 }

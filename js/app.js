@@ -4,24 +4,24 @@ import { chartHeader } from "./chart/header/chartHeader.js";
 import { barColors, strokeColor } from "./constants/colors.js";
 
 let chart = document.getElementById("chart");
-let chartData = "Endring siste måned";
 
 const data = await getData();
+let dataKey = "Endring siste måned";
 
 chartHeader(data);
-createChart(data, chartData, barColors, strokeColor);
+createChart(data, dataKey);
 
 // //Redraw the chart if window is resized
 function onWindowResize() {
-  createChart(data, chartData, barColors, strokeColor);
+  createChart(data, dataKey);
 }
 window.addEventListener("resize", onWindowResize);
 
 // //redraw the chart if dropdown has been changed
 function onDropdownChange(e) {
   if (e.target.id === "chart-dropdown") {
-    chartData = e.target.value;
-    createChart(data, chartData, barColors, strokeColor);
+    dataKey = e.target.value;
+    createChart(data, dataKey);
   }
 }
 document.addEventListener("change", onDropdownChange);

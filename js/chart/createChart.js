@@ -5,7 +5,7 @@ import { crosshair } from "./crosshair.js";
 import { clearChart, chartStyle } from "../util/chartUtil.js";
 import { padding } from "../constants/chartConsts.js";
 
-export function createChart(data, chartData, barColors, strokeColor) {
+export function createChart(data, dataKey) {
   let scaleFactor = 0.9;
 
   const chart = document.getElementById("chart");
@@ -18,8 +18,8 @@ export function createChart(data, chartData, barColors, strokeColor) {
 
   for (const city in data) {
     minMax = {
-      min: Math.min(minMax.min, data[city][chartData]),
-      max: Math.max(minMax.max, data[city][chartData]),
+      min: Math.min(minMax.min, data[city][dataKey]),
+      max: Math.max(minMax.max, data[city][dataKey]),
     };
   }
 
@@ -30,17 +30,6 @@ export function createChart(data, chartData, barColors, strokeColor) {
 
   let barWidth = 30;
 
-  addBars(
-    dimensions,
-    data,
-    padding,
-    barWidth,
-    offset,
-    scale,
-    scaleFactor,
-    barColors,
-    strokeColor,
-    chartData,
-  );
+  addBars(data, barWidth, offset, scale, dataKey);
   addAxes(dimensions, padding, offset, minMax, scale, scaleFactor);
 }

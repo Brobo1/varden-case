@@ -1,5 +1,6 @@
-//functions to handle chart logic
 import { padding } from "../constants/chartConsts.js";
+
+//functions to handle chart logic
 
 //clear the chart
 export function clearChart(chart = document.getElementById("chart")) {

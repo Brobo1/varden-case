@@ -23,7 +23,7 @@
 
 export async function getData() {
   try {
-    const res = await fetch("../data/data.json").then((res) => res.json());
+    const res = await fetch("./data.json").then((res) => res.json());
     return transformData(res);
   } catch (err) {
     console.error("Error fetching JSON:", err);
@@ -31,17 +31,6 @@ export async function getData() {
 }
 
 function transformData(originalData) {
-  const keyMap = {
-    "Endring siste måned": "dMonth",
-    "Endring sesongjustert siste måned": "dMonthSeasonAdj",
-    "Endring hittil i år": "ytd",
-    "Endring siste år": "dYr",
-    "Endring siste 5 år": "d5Yr",
-    "Endring siste 10 år": "d10Yr",
-    "Gjennomsnitt kvm. pris": "avgMCost",
-    Gjennomsnittspris: "avgCost",
-  };
-
   const result = {};
 
   for (const city in originalData) {
