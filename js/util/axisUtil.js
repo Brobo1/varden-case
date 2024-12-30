@@ -1,4 +1,4 @@
-import { newSvgElem } from "./svgUtil.js";
+import { measureSvg, newSvgElem } from "./svgUtil.js";
 
 export function createYAxisLabel(
   value,
@@ -21,10 +21,7 @@ export function createYAxisLabel(
   });
   label.textContent = value;
 
-  const tempCont = document.getElementById("temp-svg");
-  tempCont.appendChild(label);
-  const bBox = label.getBBox();
-  tempCont.removeChild(label);
+  const bBox = measureSvg(label);
 
   const background = newSvgElem("rect", {
     x: bBox.x - 4,
@@ -44,6 +41,5 @@ export function createYAxisLabel(
     "stroke-width": 1,
   });
 
-  console.log(bBox);
   return newSvgElem("g", {}, [background, dash, label]);
 }

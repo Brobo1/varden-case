@@ -14,3 +14,11 @@ export function setSvgAttr(elem, attr = {}) {
     elem.setAttribute(key, val.toString());
   }
 }
+
+export function measureSvg(elem) {
+  const tempCont = document.getElementById("temp-svg");
+  tempCont.appendChild(elem);
+  const bBox = elem.getBBox();
+  tempCont.removeChild(elem);
+  return bBox;
+}

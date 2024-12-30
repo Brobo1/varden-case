@@ -20,6 +20,8 @@ body {
 #temp-svg {
   visibility: hidden;
   position: absolute;
+  width: 0;
+  height: 0;
 }
 
 h1 {
