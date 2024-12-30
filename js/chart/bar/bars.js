@@ -1,5 +1,5 @@
 import { addBarName } from "./barNames.js";
-import { setSvgAttr, newSvgElem } from "../../util/svgUtil.js";
+import { newSvgElem } from "../../util/svgUtil.js";
 
 const chart = document.getElementById("chart");
 
@@ -97,7 +97,7 @@ export function addBars(
         color.fill,
         strokeColor,
         textWrap,
-      ) + 26;
+      ) + 28;
 
     wrapLineWidth += barNameWidth;
     barNameXPos += barNameWidth;
