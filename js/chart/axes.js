@@ -31,18 +31,14 @@ export function addAxes(centerPoint, minMax, scale, dataKey) {
   });
   yAxis.id = "yAxis";
 
-  let step = (dimensions.height - padding.y) / 3;
-  console.log(dimensions.height - padding.y);
+  const stepCount = 5;
+  const stepHeight = (dimensions.height - padding.y * 2) / (stepCount - 1);
 
-  console.log(step);
+  for (let i = 0; i < stepCount; i++) {
+    const yPos = i * stepHeight;
 
-  for (let i = centerPoint; i <= dimensions.yAxis; i += step) {
-    axisContainer.append(createYAxisLabel(i, centerPoint, scale, dataKey));
+    axisContainer.append(createYAxisLabel(yPos, centerPoint, scale, dataKey));
   }
-  if (centerPoint !== 0)
-    for (let i = centerPoint; i >= 0; i -= step) {
-      axisContainer.append(createYAxisLabel(i, centerPoint, scale, dataKey));
-    }
 
   //Add labels to yAxis
   // let values = [minMax.min, 0, minMax.max];

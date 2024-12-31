@@ -12,11 +12,6 @@ body {
   align-items: center;
 }
 
-/*html,*/
-/*body {*/
-/*  height: 100%;*/
-/*}*/
-
 #temp-svg {
   visibility: hidden;
   position: absolute;
@@ -38,11 +33,12 @@ main {
 }
 
 #chart-header {
-  margin: 10px 20px;
+  margin: 50px auto 0 auto;
+  display: flex;
+  gap: 20px;
 }
 
 #chart-title {
-  margin: 0;
   font-weight: 300;
 }
 
@@ -61,6 +57,10 @@ main {
   font-size: 24px;
   font-family: Roboto, sans-serif;
   font-weight: 300;
+}
+
+#chartTitle {
+  margin: 0;
 }
 
 svg {

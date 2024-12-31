@@ -14,5 +14,9 @@ export function chartHeader(data) {
     dropdown.append(dropdownOption);
   }
 
-  headerDiv.append(dropdown);
+  const title = document.createElement("h2");
+  title.id = "chartTitle";
+  title.textContent = "Huspris: ";
+
+  headerDiv.append(title, dropdown);
 }

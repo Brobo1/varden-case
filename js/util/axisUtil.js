@@ -6,7 +6,7 @@ import { chartStyle } from "./chartUtil.js";
 export function createYAxisLabel(value, centerPoint, scale, dataKey) {
   let dimensions = chartStyle();
   const yPos = dimensions.yAxis + padding.y - value;
-  let unit = " Kr";
+  let unit = " NOK";
   let labelText = "";
 
   if (dataKey.includes("Endring")) {
@@ -21,12 +21,14 @@ export function createYAxisLabel(value, centerPoint, scale, dataKey) {
     color: "white",
     class: "axisLabel",
   });
-  if (unit.includes("Kr")) {
+  if (unit.includes("NOK")) {
     let rawValue = (value - centerPoint) / scale / scaleFactor;
     if (rawValue >= 1000000) {
       labelText = (rawValue / 1000000).toFixed(1) + "M";
     } else if (rawValue >= 1000) {
       labelText = Math.round(rawValue / 1000) + "K";
+    } else {
+      labelText = rawValue;
     }
   } else {
     labelText = ((value - centerPoint) / scale / scaleFactor).toFixed(2);
@@ -46,7 +48,7 @@ export function createYAxisLabel(value, centerPoint, scale, dataKey) {
 
   const dash = newSvgElem("line", {
     x1: padding.x - 10,
-    x2: padding.x - 1,
+    x2: padding.x,
     y1: yPos,
     y2: yPos,
     stroke: "#bbb",

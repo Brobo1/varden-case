@@ -1,32 +1,36 @@
 import { createYAxisLabel } from "../util/axisUtil.js";
 import { setSvgAttr } from "../util/svgUtil.js";
-import { padding, scaleFactor } from "../constants/chartConsts.js";
 
 const chart = document.getElementById("chart");
 
 let coord = 0;
+let prevKey = null;
+export function crosshair(centerPoint, scale, dataKey) {
+  function onMouseMove(e) {
+    let mousePos = e.clientY;
+    const yAxis = document.getElementById("yAxis").getBoundingClientRect();
+    const yPos = Math.round(yAxis.bottom - mousePos);
 
-function onMouseMove(e, centerPoint, scale) {
-  let mousePos = e.clientY;
-  const yAxis = document.getElementById("yAxis").getBoundingClientRect();
-  const yPos = Math.round(yAxis.bottom - mousePos);
-  if (coord !== yPos && yAxis.top < mousePos && yAxis.bottom > mousePos) {
-    const scaledValue = yPos;
-    const axisCrosshair = createYAxisLabel(
-      scaledValue.toFixed(2),
-      centerPoint,
-      scale,
-    );
-    chart.querySelector(".crosshairLabel")?.remove();
-    setSvgAttr(axisCrosshair, { class: "crosshairLabel" });
-    chart.appendChild(axisCrosshair);
+    if (mousePos < yAxis.top || mousePos > yAxis.bottom) {
+      chart.querySelector(".crosshairLabel")?.remove();
+      return;
+    }
+
+    if (coord !== yPos || prevKey !== dataKey) {
+      const axisCrosshair = createYAxisLabel(
+        yPos.toFixed(2),
+        centerPoint,
+        scale,
+        dataKey,
+      );
+
+      chart.querySelector(".crosshairLabel")?.remove();
+      setSvgAttr(axisCrosshair, { class: "crosshairLabel" });
+      chart.appendChild(axisCrosshair);
+    }
+    coord = yPos;
+    prevKey = dataKey;
   }
-  coord = yPos;
-}
-
-export function crosshair(centerPoint, scale) {
   chart.removeEventListener("mousemove", onMouseMove);
-  chart.addEventListener("mousemove", (e) =>
-    onMouseMove(e, centerPoint, scale),
-  );
+  chart.addEventListener("mousemove", onMouseMove);
 }
