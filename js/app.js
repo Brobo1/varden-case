@@ -6,7 +6,7 @@ import { barColors, strokeColor } from "./constants/colors.js";
 let chart = document.getElementById("chart");
 
 const data = await getData();
-let dataKey = "Endring siste måned";
+let dataKey = "Endring hittil i år";
 
 chartHeader(data);
 createChart(data, dataKey);

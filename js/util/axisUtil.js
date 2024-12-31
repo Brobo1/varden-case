@@ -3,21 +3,35 @@ import { padding, scaleFactor } from "../constants/chartConsts.js";
 import { chartStyle } from "./chartUtil.js";
 
 //create labels for the y-axis
-export function createYAxisLabel(value, centerPoint, scale) {
+export function createYAxisLabel(value, centerPoint, scale, dataKey) {
   let dimensions = chartStyle();
+  const yPos = dimensions.yAxis + padding.y - value;
+  let unit = " Kr";
+  let labelText = "";
 
-  const scaledPos =
-    dimensions.height - padding.y - (centerPoint + value * scale * scaleFactor);
+  if (dataKey.includes("Endring")) {
+    unit = "%";
+  }
 
   const label = newSvgElem("text", {
     x: padding.x - 17,
-    y: dimensions.height - padding.y - value,
+    y: yPos,
     "dominant-baseline": "central",
     "text-anchor": "end",
     color: "white",
     class: "axisLabel",
   });
-  label.textContent = ((value - centerPoint) / scale / scaleFactor).toFixed(2);
+  if (unit.includes("Kr")) {
+    let rawValue = (value - centerPoint) / scale / scaleFactor;
+    if (rawValue >= 1000000) {
+      labelText = (rawValue / 1000000).toFixed(1) + "M";
+    } else if (rawValue >= 1000) {
+      labelText = Math.round(rawValue / 1000) + "K";
+    }
+  } else {
+    labelText = ((value - centerPoint) / scale / scaleFactor).toFixed(2);
+  }
+  label.textContent = labelText + unit;
 
   const bBox = measureSvg(label);
 
@@ -33,13 +47,11 @@ export function createYAxisLabel(value, centerPoint, scale) {
   const dash = newSvgElem("line", {
     x1: padding.x - 10,
     x2: padding.x - 1,
-    y1: dimensions.height - padding.y - value,
-    y2: dimensions.height - padding.y - value,
+    y1: yPos,
+    y2: yPos,
     stroke: "#bbb",
     "stroke-width": 1,
   });
-  console.log(
-    `Text value: ${label.textContent}, pixel position: ${dimensions.height - padding.y - value}`,
-  );
+
   return newSvgElem("g", {}, [background, dash, label]);
 }

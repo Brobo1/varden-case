@@ -5,7 +5,7 @@ import { chartStyle } from "../util/chartUtil.js";
 
 const chart = document.getElementById("chart");
 
-export function addAxes(centerPoint, minMax, scale) {
+export function addAxes(centerPoint, minMax, scale, dataKey) {
   const dimensions = chartStyle();
   const axisContainer = newSvgElem("svg", {}, []);
   axisContainer.id = "axisContainer";
@@ -31,29 +31,17 @@ export function addAxes(centerPoint, minMax, scale) {
   });
   yAxis.id = "yAxis";
 
-  let yAxisCenterToTop = yAxis.y2.baseVal.value - centerPoint - padding.y;
+  let step = (dimensions.height - padding.y) / 3;
+  console.log(dimensions.height - padding.y);
 
-  console.log(centerPoint);
-
-  // for (let i = Math.min(minMax.min, 0); i <= minMax.max; i += minMax.max / 5) {
-  //   axisContainer.append(createYAxisLabel(i.toFixed(2), centerPoint, scale));
-  // }
-  //
-
-  let step = dimensions.yAxis / 5;
+  console.log(step);
 
   for (let i = centerPoint; i <= dimensions.yAxis; i += step) {
-    axisContainer.append(createYAxisLabel(i, centerPoint, scale));
-    console.log(
-      `i: ${i}, step: ${step}, adjustedValue (yPos): ${i}, centerPoint: ${centerPoint}`,
-    );
+    axisContainer.append(createYAxisLabel(i, centerPoint, scale, dataKey));
   }
   if (centerPoint !== 0)
-    for (let i = centerPoint; i >= 0 - step; i -= step) {
-      axisContainer.append(createYAxisLabel(i, centerPoint, scale));
-      console.log(
-        `i: ${i}, step: ${step}, adjustedValue (yPos): ${i}, centerPoint: ${centerPoint}`,
-      );
+    for (let i = centerPoint; i >= 0; i -= step) {
+      axisContainer.append(createYAxisLabel(i, centerPoint, scale, dataKey));
     }
 
   //Add labels to yAxis
