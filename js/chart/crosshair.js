@@ -7,14 +7,13 @@ const chart = document.getElementById("chart");
 let coord = 0;
 
 function onMouseMove(e, centerPoint, scale) {
-  const rect = chart.getBoundingClientRect();
   let mousePos = e.clientY;
   const yAxis = document.getElementById("yAxis").getBoundingClientRect();
   const yPos = Math.round(yAxis.bottom - mousePos);
   if (coord !== yPos && yAxis.top < mousePos && yAxis.bottom > mousePos) {
-    const scaledValue = yPos / scale;
+    const scaledValue = yPos;
     const axisCrosshair = createYAxisLabel(
-      (scaledValue / scaleFactor).toFixed(2),
+      scaledValue.toFixed(2),
       centerPoint,
       scale,
     );

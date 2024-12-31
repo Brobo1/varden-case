@@ -29,5 +29,5 @@ export function createChart(data, dataKey) {
 
   addBars(data, barWidth, offset, scale, dataKey);
   addAxes(offset, minMax, scale);
-  crosshair(offset, scale);
+  // crosshair(offset, scale);
 }

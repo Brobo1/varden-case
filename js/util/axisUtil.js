@@ -11,13 +11,13 @@ export function createYAxisLabel(value, centerPoint, scale) {
 
   const label = newSvgElem("text", {
     x: padding.x - 17,
-    y: scaledPos,
+    y: dimensions.height - padding.y - value,
     "dominant-baseline": "central",
     "text-anchor": "end",
     color: "white",
     class: "axisLabel",
   });
-  label.textContent = value;
+  label.textContent = ((value - centerPoint) / scale / scaleFactor).toFixed(2);
 
   const bBox = measureSvg(label);
 
@@ -33,11 +33,13 @@ export function createYAxisLabel(value, centerPoint, scale) {
   const dash = newSvgElem("line", {
     x1: padding.x - 10,
     x2: padding.x - 1,
-    y1: scaledPos,
-    y2: scaledPos,
+    y1: dimensions.height - padding.y - value,
+    y2: dimensions.height - padding.y - value,
     stroke: "#bbb",
     "stroke-width": 1,
   });
-
+  console.log(
+    `Text value: ${label.textContent}, pixel position: ${dimensions.height - padding.y - value}`,
+  );
   return newSvgElem("g", {}, [background, dash, label]);
 }
