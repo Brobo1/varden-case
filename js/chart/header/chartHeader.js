@@ -16,7 +16,7 @@ export function chartHeader(data) {
 
   const title = document.createElement("h2");
   title.id = "chartTitle";
-  title.textContent = "Huspris: ";
+  title.textContent = "Boligpris: ";
 
   headerDiv.append(title, dropdown);
 }
