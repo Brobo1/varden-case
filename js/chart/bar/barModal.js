@@ -27,12 +27,12 @@ export function barModal(data, dataKey) {
     let textDim = measureSvg(modalText);
 
     let modalWidth = textDim.width + 10;
-    let modalHeight = textDim.height + 10;
+    let modalHeight = textDim.height + 6;
 
-    let yPos = getAttr("y") - modalHeight - 10;
+    let yPos = getAttr("y") - modalHeight - 5;
     let xPos = getAttr("x") - (modalWidth - getAttr("width")) / 2;
 
-    setSvgAttr(modalText, { x: xPos + 5, y: yPos + textDim.height });
+    setSvgAttr(modalText, { x: xPos + 5, y: yPos + textDim.height - 1 });
 
     let modalRect = newSvgElem("rect", {
       x: xPos,
