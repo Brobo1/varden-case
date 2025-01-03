@@ -3,6 +3,7 @@ import { newSvgElem, setSvgAttr } from "../../util/svgUtil.js";
 import { padding, scaleFactor } from "../../constants/chartConsts.js";
 import { chartStyle } from "../../util/chartUtil.js";
 import { barColors, strokeColor } from "../../constants/colors.js";
+import { barModal } from "./barModal.js";
 
 const chart = document.getElementById("chart");
 
