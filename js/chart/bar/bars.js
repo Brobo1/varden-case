@@ -10,12 +10,12 @@ const chart = document.getElementById("chart");
 // Create bars
 function addBar(barHeight, city, spacing, width, offset, isNegative) {
   const barsContainer = document.getElementById("barsContainer");
-  let centerPoint = chartStyle().height - padding.y - offset;
+  let centerPoint = chartStyle().height - padding.yBottom - offset;
   let barStartPoint = isNegative ? centerPoint : centerPoint - barHeight;
 
   const bar = newSvgElem("rect", {
     class: `bar ${city}`,
-    x: padding.x + spacing,
+    x: padding.xLeft + spacing,
     y: barStartPoint,
     width: width,
     height: barHeight,
@@ -35,6 +35,8 @@ export function addBars(data, barWidth, offset, scale, chartKey) {
   let totalSpacing = dimensions.xAxis - numBars * barWidth;
   let spaceBetweenBars = totalSpacing / (numBars + 1);
   let textWrap = 0;
+
+  console.log(dimensions.xAxis);
 
   let barNameXPos = 4;
 

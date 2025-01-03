@@ -16,7 +16,7 @@ export function chartStyle() {
   return {
     width: parseInt(chartStyles.width),
     height: parseInt(chartStyles.height),
-    xAxis: parseInt(chartStyles.width) - padding.x * 2,
-    yAxis: parseInt(chartStyles.height) - padding.y * 2,
+    xAxis: parseInt(chartStyles.width) - padding.xLeft - padding.xRight,
+    yAxis: parseInt(chartStyles.height) - padding.yTop - padding.yBottom,
   };
 }

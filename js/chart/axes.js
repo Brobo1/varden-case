@@ -13,26 +13,27 @@ export function addAxes(centerPoint, minMax, scale, dataKey) {
 
   //Create xAxis
   const xAxis = newSvgElem("line", {
-    x1: padding.x + 1,
-    x2: dimensions.width - padding.x,
-    y1: dimensions.height - padding.y - centerPoint,
-    y2: dimensions.height - padding.y - centerPoint,
+    x1: padding.xLeft + 1,
+    x2: dimensions.width - padding.xRight,
+    y1: dimensions.height - padding.yBottom - centerPoint,
+    y2: dimensions.height - padding.yBottom - centerPoint,
     stroke: "#bbb",
   });
   xAxis.id = "xAxis";
 
   //Create yAxis
   const yAxis = newSvgElem("line", {
-    x1: padding.x,
-    x2: padding.x,
-    y1: padding.y,
-    y2: dimensions.height - padding.y + 0.5,
+    x1: padding.xLeft,
+    x2: padding.xLeft,
+    y1: padding.yTop,
+    y2: dimensions.height - padding.yBottom + 0.5,
     stroke: "#bbb",
   });
   yAxis.id = "yAxis";
 
   const stepCount = 5;
-  const stepHeight = (dimensions.height - padding.y * 2) / (stepCount - 1);
+  const stepHeight =
+    (dimensions.height - padding.yTop - padding.yBottom) / (stepCount - 1);
 
   for (let i = 0; i < stepCount; i++) {
     const yPos = i * stepHeight;

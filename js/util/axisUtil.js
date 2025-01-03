@@ -6,12 +6,12 @@ import { shortenValue, valueType } from "./unitUtil.js";
 //create labels for the y-axis
 export function createYAxisLabel(value, centerPoint, scale, dataKey) {
   let dimensions = chartStyle();
-  const yPos = dimensions.yAxis + padding.y - value;
+  const yPos = dimensions.yAxis + padding.yTop - value;
   let unit = valueType(dataKey);
   let labelText = "";
 
   const label = newSvgElem("text", {
-    x: padding.x - 17,
+    x: padding.xLeft - 17,
     y: yPos,
     "dominant-baseline": "central",
     "text-anchor": "end",
@@ -38,8 +38,8 @@ export function createYAxisLabel(value, centerPoint, scale, dataKey) {
   });
 
   const dash = newSvgElem("line", {
-    x1: padding.x - 10,
-    x2: padding.x,
+    x1: padding.xLeft - 10,
+    x2: padding.xLeft,
     y1: yPos,
     y2: yPos,
     stroke: "#bbb",
