@@ -6,6 +6,7 @@ export function addBarName(city, barNameXPos, textWrap) {
   const dimensions = chartStyle();
 
   const barName = newSvgElem("text", {
+    class: `barName ${city} text`,
     x: barNameXPos + 16,
     y: dimensions.height - 40 + textWrap,
     "font-size": 20,
@@ -13,7 +14,7 @@ export function addBarName(city, barNameXPos, textWrap) {
   barName.textContent = city;
 
   const barNameColor = newSvgElem("rect", {
-    class: `barNameColor ${city}`,
+    class: `barName ${city} color`,
     x: barNameXPos,
     y: dimensions.height - 53 + textWrap,
     width: 12,
@@ -23,7 +24,7 @@ export function addBarName(city, barNameXPos, textWrap) {
     "stroke-width": 1,
   });
 
-  const barNameContainer = newSvgElem("g", { class: `barName ${city}` }, [
+  const barNameContainer = newSvgElem("svg", { class: `barName ${city}` }, [
     barName,
     barNameColor,
   ]);
@@ -34,7 +35,7 @@ export function addBarName(city, barNameXPos, textWrap) {
   let barNameBBox = barNameContainer.getBBox();
 
   const background = newSvgElem("rect", {
-    class: `barNameBg ${city}`,
+    class: `barName ${city} background`,
     x: barNameBBox.x - 4,
     y: barNameBBox.y,
     width: barNameBBox.width + 8,

@@ -15,8 +15,8 @@ export function barModal(data, dataKey) {
   }
 
   function onMouseOver(e) {
-    let getAttr = getAttrBind(e.target);
-    let city = e.target.classList[1];
+    let getAttr = getAttrBind(e);
+    let city = e.classList[1];
     let unit = valueType(dataKey);
     let value = shortenValue(data[city][dataKey]);
 

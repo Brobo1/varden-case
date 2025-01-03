@@ -4,6 +4,7 @@ import { chartHeader } from "./chart/header/chartHeader.js";
 import { barColors, strokeColor } from "./constants/colors.js";
 import { barModal } from "./chart/bar/barModal.js";
 import { barHoverColor, barNoHoverColor } from "./util/barUtil.js";
+import { setSvgAttr } from "./util/svgUtil.js";
 
 let chart = document.getElementById("chart");
 
@@ -32,20 +33,22 @@ document.addEventListener("change", onDropdownChange);
 
 function onBarMouseOver(e) {
   let target = e.target.classList;
+  let bar = document.querySelector(`.bar.${target[1]}`);
 
-  if (target.contains("bar")) {
-    barHoverColor(e);
-    modalHandler.onMouseOver(e);
+  if (target.contains("bar") || target.contains("barName")) {
+    barHoverColor(bar);
+    modalHandler.onMouseOver(bar);
   }
 }
 chart.addEventListener("mouseover", onBarMouseOver);
 
 function onBarMouseOut(e) {
   let target = e.target.classList;
+  let bar = document.querySelector(`.bar.${target[1]}`);
 
-  if (target.contains("bar")) {
-    barNoHoverColor(e);
-    modalHandler.onMouseOut(e);
+  if (target.contains("bar") || target.contains("barName")) {
+    barNoHoverColor(bar);
+    modalHandler.onMouseOut(bar);
   }
 }
 chart.addEventListener("mouseout", onBarMouseOut);
