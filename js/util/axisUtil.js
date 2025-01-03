@@ -1,17 +1,14 @@
 import { measureSvg, newSvgElem } from "./svgUtil.js";
 import { padding, scaleFactor } from "../constants/chartConsts.js";
 import { chartStyle } from "./chartUtil.js";
+import { shortenValue, valueType } from "./unitUtil.js";
 
 //create labels for the y-axis
 export function createYAxisLabel(value, centerPoint, scale, dataKey) {
   let dimensions = chartStyle();
   const yPos = dimensions.yAxis + padding.y - value;
-  let unit = " NOK";
+  let unit = valueType(dataKey);
   let labelText = "";
-
-  if (dataKey.includes("Endring")) {
-    unit = "%";
-  }
 
   const label = newSvgElem("text", {
     x: padding.x - 17,
@@ -21,17 +18,11 @@ export function createYAxisLabel(value, centerPoint, scale, dataKey) {
     color: "white",
     class: "axisLabel",
   });
+  let rawValue = (value - centerPoint) / scale / scaleFactor;
   if (unit.includes("NOK")) {
-    let rawValue = (value - centerPoint) / scale / scaleFactor;
-    if (rawValue >= 1000000) {
-      labelText = (rawValue / 1000000).toFixed(1) + "M";
-    } else if (rawValue >= 1000) {
-      labelText = Math.round(rawValue / 1000) + "K";
-    } else {
-      labelText = rawValue;
-    }
+    labelText = shortenValue(rawValue);
   } else {
-    labelText = ((value - centerPoint) / scale / scaleFactor).toFixed(2);
+    labelText = shortenValue(rawValue).toFixed(2);
   }
   label.textContent = labelText + unit;
 

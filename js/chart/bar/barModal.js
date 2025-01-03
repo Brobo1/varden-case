@@ -1,10 +1,11 @@
 import { newSvgElem } from "../../util/svgUtil.js";
 import { chartStyle } from "../../util/chartUtil.js";
 import { padding } from "../../constants/chartConsts.js";
+import { valueType } from "../../util/unitUtil.js";
 
 const chart = document.getElementById("chart");
 
-export function barModal() {
+export function barModal(data, dataKey) {
   let modal = null;
 
   function getAttrBind(target) {
@@ -17,24 +18,32 @@ export function barModal() {
     let getAttr = getAttrBind(e.target);
     let modalWidth = 100;
     let modalHeight = 40;
+    let city = e.target.classList[1];
+    let unit = valueType(dataKey);
+
+    console.log(unit);
 
     let yPos = getAttr("y") - modalHeight - 10;
     let xPos = getAttr("x") - (modalWidth - getAttr("width")) / 2;
 
-    console.log(xPos);
-    let modalText = newSvgElem("text", {});
-    modalText.textContent = "123";
+    let modalText = newSvgElem("text", {
+      x: xPos + 5,
+      y: yPos + 20,
+      fill: "white",
+    });
+    modalText.textContent = data[city][dataKey];
 
-    modal = newSvgElem(
-      "rect",
-      {
-        x: xPos,
-        y: yPos,
-        height: modalHeight,
-        width: modalWidth,
-      },
-      [modalText],
-    );
+    let modalRect = newSvgElem("rect", {
+      x: xPos,
+      y: yPos,
+      rx: 2,
+      height: modalHeight,
+      width: modalWidth,
+      "fill-opacity": 0.5,
+    });
+
+    modal = newSvgElem("g", {}, [modalRect, modalText]);
+
     chart.appendChild(modal);
   }
 

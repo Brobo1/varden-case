@@ -8,8 +8,8 @@ import { barHoverColor, barNoHoverColor } from "./util/barUtil.js";
 let chart = document.getElementById("chart");
 
 const data = await getData();
-let dataKey = "Endring hittil i år";
-let modalHandler = barModal();
+let dataKey = "Endring siste måned";
+let modalHandler = barModal(data, dataKey);
 
 chartHeader(data);
 createChart(data, dataKey);
@@ -25,6 +25,7 @@ function onDropdownChange(e) {
   if (e.target.id === "chart-dropdown") {
     dataKey = e.target.value;
     createChart(data, dataKey);
+    modalHandler = barModal(data, dataKey);
   }
 }
 document.addEventListener("change", onDropdownChange);
