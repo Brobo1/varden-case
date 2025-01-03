@@ -10,6 +10,7 @@ export function addBarName(city, barNameXPos, textWrap) {
     x: barNameXPos + 16,
     y: dimensions.height - 40 + textWrap,
     "font-size": 20,
+    "pointer-events": "none",
   });
   barName.textContent = city;
 
