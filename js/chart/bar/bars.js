@@ -1,5 +1,5 @@
 import { addBarName } from "./barNames.js";
-import { newSvgElem } from "../../util/svgUtil.js";
+import { newSvgElem, setSvgAttr } from "../../util/svgUtil.js";
 import { padding, scaleFactor } from "../../constants/chartConsts.js";
 import { chartStyle } from "../../util/chartUtil.js";
 import { barColors, strokeColor } from "../../constants/colors.js";
@@ -42,10 +42,8 @@ export function addBars(data, barWidth, offset, scale, chartKey) {
   barNamesContainer.id = "barNamesContainer";
   chart.appendChild(barNamesContainer);
 
-  let barsContainer = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "svg",
-  );
+  let barsContainer = newSvgElem("svg", {}, []);
+
   barsContainer.id = "barsContainer";
   chart.appendChild(barsContainer);
 
@@ -60,9 +58,9 @@ export function addBars(data, barWidth, offset, scale, chartKey) {
     addBar(barHeight, city, spacing, barWidth, offset, isNegative);
 
     let barNameWidth = addBarName(city, barNameXPos, textWrap) + 28;
-
     wrapLineWidth += barNameWidth;
     barNameXPos += barNameWidth;
+
     if (wrapLineWidth > 300) {
       wrapLineWidth = 0;
       textWrap += 28;
@@ -72,8 +70,7 @@ export function addBars(data, barWidth, offset, scale, chartKey) {
     spacing += barWidth;
   }
 
-  barNamesContainer.setAttribute(
-    "x",
-    `${(dimensions.width - barNamesContainer.getBBox().width) / 2}`,
-  );
+  setSvgAttr(barNamesContainer, {
+    x: `${(dimensions.width - barNamesContainer.getBBox().width) / 2}`,
+  });
 }
