@@ -1,4 +1,4 @@
-import { newSvgElem } from "../../util/svgUtil.js";
+import { measureSvg, newSvgElem, setSvgAttr } from "../../util/svgUtil.js";
 import { chartStyle } from "../../util/chartUtil.js";
 import { padding } from "../../constants/chartConsts.js";
 import { shortenValue, valueType } from "../../util/unitUtil.js";
@@ -16,23 +16,23 @@ export function barModal(data, dataKey) {
 
   function onMouseOver(e) {
     let getAttr = getAttrBind(e.target);
-    let modalWidth = 100;
-    let modalHeight = 40;
     let city = e.target.classList[1];
     let unit = valueType(dataKey);
     let value = shortenValue(data[city][dataKey]);
 
-    console.log(value);
+    let modalText = newSvgElem("text", {
+      fill: "white",
+    });
+    modalText.textContent = value + unit;
+    let textDim = measureSvg(modalText);
+
+    let modalWidth = textDim.width + 10;
+    let modalHeight = textDim.height + 10;
 
     let yPos = getAttr("y") - modalHeight - 10;
     let xPos = getAttr("x") - (modalWidth - getAttr("width")) / 2;
 
-    let modalText = newSvgElem("text", {
-      x: xPos + 5,
-      y: yPos + 20,
-      fill: "white",
-    });
-    modalText.textContent = value + unit;
+    setSvgAttr(modalText, { x: xPos + 5, y: yPos + textDim.height });
 
     let modalRect = newSvgElem("rect", {
       x: xPos,
