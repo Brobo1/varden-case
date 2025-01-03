@@ -29,6 +29,7 @@ export function barModal(data, dataKey) {
     let modalWidth = textDim.width + 10;
     let modalHeight = textDim.height + 6;
 
+    console.log(value);
     let yPos = getAttr("y") - modalHeight - 5;
     let xPos = getAttr("x") - (modalWidth - getAttr("width")) / 2;
 
