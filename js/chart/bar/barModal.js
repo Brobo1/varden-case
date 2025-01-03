@@ -1,7 +1,7 @@
 import { newSvgElem } from "../../util/svgUtil.js";
 import { chartStyle } from "../../util/chartUtil.js";
 import { padding } from "../../constants/chartConsts.js";
-import { valueType } from "../../util/unitUtil.js";
+import { shortenValue, valueType } from "../../util/unitUtil.js";
 
 const chart = document.getElementById("chart");
 
@@ -20,8 +20,9 @@ export function barModal(data, dataKey) {
     let modalHeight = 40;
     let city = e.target.classList[1];
     let unit = valueType(dataKey);
+    let value = shortenValue(data[city][dataKey]);
 
-    console.log(unit);
+    console.log(value);
 
     let yPos = getAttr("y") - modalHeight - 10;
     let xPos = getAttr("x") - (modalWidth - getAttr("width")) / 2;
@@ -31,7 +32,7 @@ export function barModal(data, dataKey) {
       y: yPos + 20,
       fill: "white",
     });
-    modalText.textContent = data[city][dataKey];
+    modalText.textContent = value + unit;
 
     let modalRect = newSvgElem("rect", {
       x: xPos,
