@@ -31,6 +31,9 @@ export function barModal(data, dataKey) {
 
     console.log(value);
     let yPos = getAttr("y") - modalHeight - 5;
+    if (value < 0) {
+      yPos = getAttr("y") + getAttr("height") + 5;
+    }
     let xPos = getAttr("x") - (modalWidth - getAttr("width")) / 2;
 
     setSvgAttr(modalText, { x: xPos + 5, y: yPos + textDim.height - 1 });
