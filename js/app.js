@@ -9,6 +9,7 @@ let chart = document.getElementById("chart");
 
 const data = await getData();
 let dataKey = "Endring hittil i år";
+let modalHandler = barModal();
 
 chartHeader(data);
 createChart(data, dataKey);
@@ -33,7 +34,7 @@ function onBarMouseOver(e) {
 
   if (target.contains("bar")) {
     barHoverColor(e);
-    barModal(e).onMouseOver(e);
+    modalHandler.onMouseOver(e);
   }
 }
 chart.addEventListener("mouseover", onBarMouseOver);
@@ -43,6 +44,9 @@ function onBarMouseOut(e) {
 
   if (target.contains("bar")) {
     barNoHoverColor(e);
+    modalHandler.onMouseOut(e);
   }
 }
 chart.addEventListener("mouseout", onBarMouseOut);
+
+// chart.addEventListener("mousemove");

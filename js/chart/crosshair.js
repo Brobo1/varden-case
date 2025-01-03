@@ -10,7 +10,6 @@ export function crosshair(centerPoint, scale, dataKey) {
     let mousePos = e.clientY;
     const yAxis = document.getElementById("yAxis").getBoundingClientRect();
     const yPos = Math.round(yAxis.bottom - mousePos);
-
     if (mousePos < yAxis.top || mousePos > yAxis.bottom) {
       chart.querySelector(".crosshairLabel")?.remove();
       return;
