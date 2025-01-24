@@ -3,7 +3,6 @@ import { addBars } from "./bar/bars.js";
 import { chartHeader } from "./header/chartHeader.js";
 import { crosshair } from "./crosshair.js";
 import { clearChart, chartStyle } from "../util/chartUtil.js";
-import { padding } from "../constants/chartConsts.js";
 
 export function createChart(data, dataKey) {
   let barWidth = 30;
